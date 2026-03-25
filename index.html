@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Prueba Diagnóstica - 9º Grado A</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f3f4f6; color: #1f2937; margin: 0; padding: 0; line-height: 1.6; }
+        
+        header { background-color: #1e3a8a; color: white; padding: 20px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        header h1 { margin: 0; font-size: 1.8rem; }
+        header p { margin: 5px 0 0; font-size: 1rem; opacity: 0.9; }
+
+        .container { max-width: 900px; margin: 30px auto; background: white; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; }
+        
+        /* Pestañas de Navegación */
+        .tabs { display: flex; background: #e5e7eb; cursor: pointer; flex-wrap: wrap; }
+        .tab { flex: 1; padding: 15px; text-align: center; font-weight: bold; color: #4b5563; transition: 0.3s; border-bottom: 3px solid transparent; font-size: 1rem; }
+        .tab:hover { background: #d1d5db; }
+        .tab.active { background: white; color: #1e3a8a; border-bottom: 3px solid #1e3a8a; }
+        
+        /* Contenido de las Pestañas */
+        .tab-content { display: none; padding: 30px; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Estilos de inputs y bloques */
+        h2 { color: #1e3a8a; border-bottom: 2px solid #e5e7eb; padding-bottom: 10px; margin-top: 0; font-size: 1.5rem; }
+        h3 { color: #2563eb; margin-top: 25px; font-size: 1.2rem; }
+        .reading-box { background: #f0f9ff; padding: 20px; border-left: 4px solid #3b82f6; margin-bottom: 25px; border-radius: 0 8px 8px 0; font-size: 0.95rem; color: #1e293b; }
+        .question-block { margin-bottom: 20px; display: flex; flex-direction: column; }
+        
+        label { font-weight: 600; margin-bottom: 8px; color: #374151; font-size: 0.95rem; }
+        textarea, select, input[type="text"], input[type="number"] { padding: 12px; border: 1px solid #d1d5db; border-radius: 6px; width: 100%; resize: vertical; font-size: 1rem; background-color: #f9fafb; }
+        textarea:focus, select:focus, input:focus { outline: none; border-color: #3b82f6; background-color: white; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
+        
+        .radio-group { display: flex; flex-direction: column; gap: 12px; background: #f9fafb; padding: 15px; border-radius: 6px; border: 1px solid #e5e7eb; }
+        .radio-group label { font-weight: normal; margin: 0; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .radio-group input[type="radio"] { transform: scale(1.2); }
+        
+        /* Botones */
+        .btn-nav { background: #3b82f6; color: white; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; float: right; font-weight: bold; margin-top: 10px; font-size: 1rem; transition: 0.3s; }
+        .btn-nav:hover { background: #2563eb; }
+        
+        .submit-btn { background: #10b981; color: white; padding: 16px; border: none; border-radius: 6px; cursor: pointer; width: 100%; font-size: 1.2rem; font-weight: bold; margin-top: 30px; transition: 0.3s; }
+        .submit-btn:hover { background: #059669; }
+        .submit-btn:disabled { background: #9ca3af; cursor: not-allowed; }
+
+        /* ========================================================= */
+        /* OPTIMIZACIÓN RESPONSIVA PARA CELULARES (Mobile First)     */
+        /* ========================================================= */
+        @media (max-width: 600px) {
+            header { padding: 15px; }
+            header h1 { font-size: 1.4rem; }
+            header p { font-size: 0.9rem; }
+            
+            /* El contenedor se pega a los bordes en celulares */
+            .container { margin: 0 auto; border-radius: 0; box-shadow: none; }
+            
+            /* Pestañas en cuadrícula 2x2 para no gastar espacio vertical */
+            .tabs { display: grid; grid-template-columns: 1fr 1fr; }
+            .tab { padding: 12px 5px; font-size: 0.85rem; border-bottom: 2px solid transparent; }
+            .tab.active { border-bottom: 2px solid #1e3a8a; }
+            
+            /* Reducimos el padding general para que el texto respire más */
+            .tab-content { padding: 20px 15px; }
+            .reading-box { padding: 15px; }
+            
+            h2 { font-size: 1.3rem; }
+            h3 { font-size: 1.1rem; }
+            
+            /* Botón siguiente ocupa todo el ancho abajo */
+            .btn-nav { width: 100%; float: none; text-align: center; margin-top: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Aprendamos a Estudiar</h1>
+        <p>Centro Escolar Cantón San Antonio | 9º Grado A</p>
+    </header>
+
+    <main class="container">
+        <div class="tabs">
+            <div class="tab active" onclick="openTab('registro', 0)">1. Registro</div>
+            <div class="tab" onclick="openTab('lectura', 1)">2. Lectura</div>
+            <div class="tab" onclick="openTab('matematica', 2)">3. Matemática</div>
+            <div class="tab" onclick="openTab('ciencias', 3)">4. Ciencias</div>
+        </div>
+
+        <form id="main-form">
+
+            <div id="registro" class="tab-content active">
+                <h2>Identificación del Estudiante</h2>
+                <p>Por favor, selecciona tu nombre de la lista oficial para comenzar[cite: 626].</p>
+                
+                <div class="question-block">
+                    <label>Selecciona tu nombre completo:</label>
+                    <select name="01_Estudiante" required>
+                        <option value="" disabled selected>Toca aquí para buscar tu nombre...</option>
+                        <option value="20042656 - ALEMAN ARGUETA, ADA ALICIA">ALEMAN ARGUETA, ADA ALICIA [cite: 627]</option>
+                        <option value="20042673 - ARGUETA ARGUETA, GERSON ROLANDO">ARGUETA ARGUETA, GERSON ROLANDO [cite: 627]</option>
+                        <option value="20347331 - ARGUETA MARTINEZ, JENNIFER">ARGUETA MARTINEZ, JENNIFER [cite: 627]</option>
+                        <option value="20042690 - BENITEZ SORTO, KEIRY MERARI">BENITEZ SORTO, KEIRY MERARI [cite: 627]</option>
+                        <option value="20218550 - CABRERA BELTRAN, MARLON LEVIT">CABRERA BELTRAN, MARLON LEVIT [cite: 627]</option>
+                        <option value="20218561 - DIAZ CASTILLO, BRYAN EZEQUIEL">DIAZ CASTILLO, BRYAN EZEQUIEL [cite: 627]</option>
+                        <option value="20340722 - DIAZ HENRIQUEZ, ROSA TATIANA">DIAZ HENRIQUEZ, ROSA TATIANA [cite: 627]</option>
+                        <option value="19947328 - DIAZ HERNANDEZ, HERBERTH SAMUEL">DIAZ HERNANDEZ, HERBERTH SAMUEL [cite: 627]</option>
+                        <option value="20347344 - HENRIQUEZ SORTO, OLVIN YAHIR">HENRIQUEZ SORTO, OLVIN YAHIR [cite: 627]</option>
+                        <option value="3562976 - MARTINEZ NOLASCO, ANA EMILIA">MARTINEZ NOLASCO, ANA EMILIA [cite: 627]</option>
+                        <option value="20323201 - MORALES CASTRO, ROSA ELIZABETH">MORALES CASTRO, ROSA ELIZABETH [cite: 627]</option>
+                        <option value="20229293 - RAMOS CASTILLO, FANNY LISBETH">RAMOS CASTILLO, FANNY LISBETH [cite: 627]</option>
+                        <option value="20218602 - RAMOS DIAZ, ROSALINDA">RAMOS DIAZ, ROSALINDA [cite: 627]</option>
+                        <option value="20218604 - RAMOS POSADA, GENESIS ABIGAIL">RAMOS POSADA, GENESIS ABIGAIL [cite: 627]</option>
+                        <option value="20042845 - RAMOS REQUENO, DANIEL ALEXANDER">RAMOS REQUENO, DANIEL ALEXANDER [cite: 627]</option>
+                        <option value="10289093 - RODRIGUEZ SALMERON, CARLOS FABRICIO">RODRIGUEZ SALMERON, CARLOS FABRICIO [cite: 627]</option>
+                        <option value="2786491 - ROMERO POSADA, HASLIN DAYANA">ROMERO POSADA, HASLIN DAYANA [cite: 627]</option>
+                        <option value="19947414 - SAGASTUME LOVO, NIXON EDGARDO">SAGASTUME LOVO, NIXON EDGARDO [cite: 627]</option>
+                        <option value="20042871 - SORTO AMAYA, OSCAR EZEQUIEL">SORTO AMAYA, OSCAR EZEQUIEL [cite: 627]</option>
+                        <option value="20218617 - SORTO ARGUETA, ALAN SAMIR">SORTO ARGUETA, ALAN SAMIR [cite: 627]</option>
+                    </select>
+                </div>
+                <input type="hidden" name="02_Seccion" value="9no A - Vespertino">
+                
+                <button type="button" class="btn-nav" onclick="openTab('lectura', 1)">Siguiente: Lectura ➔</button>
+                <div style="clear:both;"></div>
+            </div>
+
+            <div id="lectura" class="tab-content">
+                <h2>Área de Lectura</h2>
+                
+                <h3>Ítem 1: El avaro y su oro</h3>
+                <div class="reading-box">
+                    <p>Un avaro vendió todo lo que tenía y, con el dinero que ganó, compró una pieza de oro. Para que nadie más la viera, la enterró a la orilla de un camino...</p>
+                </div>
+                <div class="question-block"><label>¿Qué ves en la imagen del avaro?</label><textarea name="L1_Imagen" rows="2" required></textarea></div>
+                <div class="question-block"><label>¿Dónde enterró el avaro su oro?</label><input type="text" name="L1_Lugar" required></div>
+                <div class="question-block"><label>¿Cuál es la idea principal del texto?</label><textarea name="L1_Idea" rows="2" required></textarea></div>
+                <div class="question-block"><label>Dificultad de este ítem (1 al 5):</label><input type="number" name="L1_Dificultad" min="1" max="5" placeholder="Ej. 3" required></div>
+
+                <h3>Ítem 2: La leche de vaca</h3>
+                <div class="reading-box">
+                    <p>Los productos lácteos de La Granja Lechera contienen nutrientes fundamentales como calcio, proteínas, vitamina D, vitamina B12...</p>
+                </div>
+                <div class="question-block">
+                    <label>Según la AIPL, ¿con qué afirmación están de acuerdo los profesionales?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="L2_AIPL" value="A"> A. Consumir leche produce obesidad.</label>
+                        <label><input type="radio" name="L2_AIPL" value="B" required> B. La leche es buena fuente de vitaminas y minerales.</label>
+                        <label><input type="radio" name="L2_AIPL" value="C"> C. Contiene más vitaminas que minerales.</label>
+                    </div>
+                </div>
+                <div class="question-block"><label>Dificultad de este ítem (1 al 5):</label><input type="number" name="L2_Dificultad" min="1" max="5" placeholder="Ej. 2" required></div>
+
+                <button type="button" class="btn-nav" onclick="openTab('matematica', 2)">Siguiente: Matemática ➔</button>
+                <div style="clear:both;"></div>
+            </div>
+
+            <div id="matematica" class="tab-content">
+                <h2>Área de Matemática</h2>
+                
+                <h3>Ítem 1: Pruebas de IA</h3>
+                <div class="reading-box">
+                    <p>Tatiana tiene un promedio de 60 puntos en sus primeras 4 pruebas. En la quinta prueba obtiene 80 puntos. ¿Cuál es el promedio final?</p>
+                </div>
+                <div class="question-block"><label>¿Qué datos te brinda el problema?</label><textarea name="M1_Datos" rows="2" required></textarea></div>
+                <div class="question-block"><label>Desarrollo (cálculos) y Respuesta:</label><textarea name="M1_Desarrollo" rows="3" required></textarea></div>
+                <div class="question-block"><label>¿Es razonable tu resultado? ¿Por qué?</label><textarea name="M1_Validacion" rows="2" required></textarea></div>
+                <div class="question-block"><label>Dificultad de este ítem (1 al 5):</label><input type="number" name="M1_Dificultad" min="1" max="5" required></div>
+
+                <h3>Ítem 2: Factura de energía eléctrica</h3>
+                <div class="reading-box">
+                    <p>Cuota fija: $4.00. Costo por kWh: $0.15. Consumo de marzo: 150 kWh. ¿Cuál es el monto total de la factura?</p>
+                </div>
+                <div class="question-block"><label>Desarrollo (cálculos) y Respuesta:</label><textarea name="M2_Desarrollo" rows="3" required></textarea></div>
+                <div class="question-block"><label>Dificultad de este ítem (1 al 5):</label><input type="number" name="M2_Dificultad" min="1" max="5" required></div>
+
+                <button type="button" class="btn-nav" onclick="openTab('ciencias', 3)">Siguiente: Ciencias ➔</button>
+                <div style="clear:both;"></div>
+            </div>
+
+            <div id="ciencias" class="tab-content">
+                <h2>Área de Ciencia y Tecnología</h2>
+
+                <h3>Ítem 1: Migración de aves</h3>
+                <div class="reading-box">
+                    <p>La migración de aves es un movimiento estacional a gran escala. Cada año, voluntarios cuentan aves y los científicos capturan algunas para marcar sus patas...</p>
+                </div>
+                <div class="question-block">
+                    <label>¿Qué hacen los voluntarios cada año?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="C1_Voluntarios" value="A"> A. Capturan aves</label>
+                        <label><input type="radio" name="C1_Voluntarios" value="B" required> B. Marcan patas</label>
+                        <label><input type="radio" name="C1_Voluntarios" value="C"> C. Cuentan aves</label>
+                    </div>
+                </div>
+                <div class="question-block"><label>Si dejaran de migrar en grupo, ¿qué riesgos enfrentarían?</label><textarea name="C1_Riesgos" rows="2" required></textarea></div>
+                <div class="question-block"><label>Dificultad de este ítem (1 al 5):</label><input type="number" name="C1_Dificultad" min="1" max="5" required></div>
+
+                <h3>Ítem 2: Bosque de algas</h3>
+                <div class="reading-box">
+                    <p>Las algas gigantes son el alimento de los erizos. Las nutrias marinas se alimentan de erizos y regulan su población...</p>
+                </div>
+                <div class="question-block">
+                    <label>Si disminuyen las nutrias marinas, ¿qué es más probable que ocurra primero?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="C2_Nutrias" value="A"> A. Disminuyen los peces</label>
+                        <label><input type="radio" name="C2_Nutrias" value="B" required> B. Aumentan los erizos de mar</label>
+                        <label><input type="radio" name="C2_Nutrias" value="C"> C. Aumentan las nutrias</label>
+                    </div>
+                </div>
+                <div class="question-block"><label>Dificultad de este ítem (1 al 5):</label><input type="number" name="C2_Dificultad" min="1" max="5" required></div>
+
+                <hr>
+                <p style="text-align: center; font-size: 0.9rem; color: #6b7280; padding: 0 10px;">Revisa que hayas respondido todo. Al hacer clic, enviarás tus respuestas de forma definitiva.</p>
+                <button type="submit" class="submit-btn">✅ Enviar Prueba Completada</button>
+            </div>
+        </form>
+    </main>
+
+    <script>
+        // Lógica de Pestañas
+        function openTab(tabId, index) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            document.querySelectorAll('.tab')[index].classList.add('active');
+            
+            // Hacer scroll suave hacia arriba al cambiar de pestaña en celulares
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Lógica de Envío a Google Apps Script
+        document.getElementById("main-form").addEventListener("submit", function(e) {
+            e.preventDefault(); 
+            
+            const submitBtn = document.querySelector(".submit-btn");
+            submitBtn.textContent = "Procesando envío... Espera un momento";
+            submitBtn.disabled = true;
+
+            const formData = new FormData(this);
+
+            // TU URL EXACTA
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzk8skUl1jZKqoM0l2fJd_ESLq7NUk6MtciRdQ1MpKFDrqKYvrvLytiMecPRhLpJ5uh/exec';
+
+            fetch(scriptURL, { method: 'POST', body: formData })
+            .then(response => response.json())
+            .then(data => {
+                if(data.status === "success") {
+                    alert("¡Misión cumplida! Tus respuestas han sido enviadas correctamente a tu docente.");
+                    document.getElementById("main-form").reset(); 
+                    openTab('registro', 0); // Vuelve al inicio
+                } else {
+                    alert("Ocurrió un error en el servidor: " + data.message);
+                }
+            })
+            .catch(error => {
+                alert("Hubo un problema de conexión. Revisa tu internet e intenta enviar de nuevo.");
+            })
+            .finally(() => {
+                submitBtn.textContent = "✅ Enviar Prueba Completada";
+                submitBtn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
