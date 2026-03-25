@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Aprendamos a Estudiar - 9º Grado A</title>
+    <title>Aprendamos a Estudiar - 9º Grado</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
@@ -39,20 +39,21 @@
             position: relative; z-index: 10;
         }
         
+        /* Pestañas (ahora solo visuales) */
         .tabs { display: flex; border-bottom: 1px solid var(--border-color); background: #f8fafc; border-radius: 12px 12px 0 0; overflow: hidden; }
         .tab { 
             flex: 1; padding: 16px 10px; text-align: center; font-weight: 600; color: var(--text-muted); 
-            cursor: pointer; transition: all 0.2s ease; border-bottom: 3px solid transparent; font-size: 0.95rem;
+            transition: all 0.2s ease; border-bottom: 3px solid transparent; font-size: 0.95rem;
+            opacity: 0.6;
         }
-        .tab:hover { background: #f1f5f9; color: var(--primary); }
-        .tab.active { background: white; color: var(--accent); border-bottom: 3px solid var(--accent); }
+        .tab.active { background: white; color: var(--accent); border-bottom: 3px solid var(--accent); opacity: 1; }
         
         .tab-content { display: none; padding: 40px; }
         .tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
         h2 { color: var(--primary); font-size: 1.5rem; font-weight: 700; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; margin-bottom: 25px;}
-        h3 { color: var(--text-main); margin-top: 35px; font-size: 1.25rem; font-weight: 700; margin-bottom: 15px; }
+        h3 { color: var(--text-main); margin-top: 20px; font-size: 1.25rem; font-weight: 700; margin-bottom: 15px; }
         
         .fase-title {
             background-color: var(--fase-bg); color: var(--fase-text); padding: 10px 15px; 
@@ -89,7 +90,6 @@
         .radio-group label:hover { background: #f8fafc; border-color: #cbd5e1; }
         .radio-group input[type="radio"] { transform: scale(1.2); accent-color: var(--accent); }
         
-        /* Contenedor de Autoevaluación */
         .rating-container {
             background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid var(--border-color);
             margin-top: 30px; margin-bottom: 25px;
@@ -150,507 +150,408 @@
 <body>
 
     <header>
-        <h1>Aprendamos a Estudiar</h1>
+        <h1>APRENDAMOS A ESTUDIAR</h1>
         <p>Centro Escolar Cantón San Antonio | 9º Grado A</p>
     </header>
 
     <main class="container">
         <div class="tabs">
-            <div class="tab active" onclick="openTab('registro', 0)">1. Registro</div>
-            <div class="tab" onclick="openTab('lectura', 1)">2. Lectura</div>
-            <div class="tab" onclick="openTab('matematica', 2)">3. Matemática</div>
-            <div class="tab" onclick="openTab('ciencias', 3)">4. Ciencias</div>
+            <div class="tab active" id="tab-registro">1. Registro</div>
+            <div class="tab" id="tab-lectura">2. Lectura</div>
+            <div class="tab" id="tab-matematica">3. Matemática</div>
+            <div class="tab" id="tab-ciencias">4. Ciencias</div>
         </div>
 
         <form id="main-form">
+            
             <div id="registro" class="tab-content active">
-                <h2>Verificación de Identidad</h2>
-                <p style="color: #64748b; margin-bottom: 25px;">Selecciona tu nombre del registro oficial de matrícula.</p>
-                
-                <div class="question-block">
-                    <label>Estudiante matriculado:</label>
-                    <select name="01_Estudiante" required>
-                        <option value="" disabled selected>Selecciona tu nombre de la lista...</option>
-                        <option value="20042656 - ALEMAN ARGUETA, ADA ALICIA">ALEMAN ARGUETA, ADA ALICIA</option>
-                        <option value="20042673 - ARGUETA ARGUETA, GERSON ROLANDO">ARGUETA ARGUETA, GERSON ROLANDO</option>
-                        <option value="20347331 - ARGUETA MARTINEZ, JENNIFER">ARGUETA MARTINEZ, JENNIFER</option>
-                        <option value="20042690 - BENITEZ SORTO, KEIRY MERARI">BENITEZ SORTO, KEIRY MERARI</option>
-                        <option value="20218550 - CABRERA BELTRAN, MARLON LEVIT">CABRERA BELTRAN, MARLON LEVIT</option>
-                        <option value="20218561 - DIAZ CASTILLO, BRYAN EZEQUIEL">DIAZ CASTILLO, BRYAN EZEQUIEL</option>
-                        <option value="20340722 - DIAZ HENRIQUEZ, ROSA TATIANA">DIAZ HENRIQUEZ, ROSA TATIANA</option>
-                        <option value="19947328 - DIAZ HERNANDEZ, HERBERTH SAMUEL">DIAZ HERNANDEZ, HERBERTH SAMUEL</option>
-                        <option value="20347344 - HENRIQUEZ SORTO, OLVIN YAHIR">HENRIQUEZ SORTO, OLVIN YAHIR</option>
-                        <option value="3562976 - MARTINEZ NOLASCO, ANA EMILIA">MARTINEZ NOLASCO, ANA EMILIA</option>
-                        <option value="20323201 - MORALES CASTRO, ROSA ELIZABETH">MORALES CASTRO, ROSA ELIZABETH</option>
-                        <option value="20229293 - RAMOS CASTILLO, FANNY LISBETH">RAMOS CASTILLO, FANNY LISBETH</option>
-                        <option value="20218602 - RAMOS DIAZ, ROSALINDA">RAMOS DIAZ, ROSALINDA</option>
-                        <option value="20218604 - RAMOS POSADA, GENESIS ABIGAIL">RAMOS POSADA, GENESIS ABIGAIL</option>
-                        <option value="20042845 - RAMOS REQUENO, DANIEL ALEXANDER">RAMOS REQUENO, DANIEL ALEXANDER</option>
-                        <option value="10289093 - RODRIGUEZ SALMERON, CARLOS FABRICIO">RODRIGUEZ SALMERON, CARLOS FABRICIO</option>
-                        <option value="2786491 - ROMERO POSADA, HASLIN DAYANA">ROMERO POSADA, HASLIN DAYANA</option>
-                        <option value="19947414 - SAGASTUME LOVO, NIXON EDGARDO">SAGASTUME LOVO, NIXON EDGARDO</option>
-                        <option value="20042871 - SORTO AMAYA, OSCAR EZEQUIEL">SORTO AMAYA, OSCAR EZEQUIEL</option>
-                        <option value="20218617 - SORTO ARGUETA, ALAN SAMIR">SORTO ARGUETA, ALAN SAMIR</option>
-                    </select>
+                <div id="registro-i1">
+                    <h2>Verificación de Identidad</h2>
+                    <p style="color: #64748b; margin-bottom: 25px;">Selecciona tu nombre del registro oficial de matrícula.</p>
+                    
+                    <div class="question-block">
+                        <label>Estudiante matriculado:</label>
+                        <select name="01_Estudiante" required>
+                            <option value="" disabled selected>Selecciona tu nombre de la lista...</option>
+                            <option value="20042656 - ALEMAN ARGUETA, ADA ALICIA">ALEMAN ARGUETA, ADA ALICIA</option>
+                            <option value="20042673 - ARGUETA ARGUETA, GERSON ROLANDO">ARGUETA ARGUETA, GERSON ROLANDO</option>
+                            <option value="20347331 - ARGUETA MARTINEZ, JENNIFER">ARGUETA MARTINEZ, JENNIFER</option>
+                            <option value="20042690 - BENITEZ SORTO, KEIRY MERARI">BENITEZ SORTO, KEIRY MERARI</option>
+                            <option value="20218550 - CABRERA BELTRAN, MARLON LEVIT">CABRERA BELTRAN, MARLON LEVIT</option>
+                            <option value="20218561 - DIAZ CASTILLO, BRYAN EZEQUIEL">DIAZ CASTILLO, BRYAN EZEQUIEL</option>
+                            <option value="20340722 - DIAZ HENRIQUEZ, ROSA TATIANA">DIAZ HENRIQUEZ, ROSA TATIANA</option>
+                            <option value="19947328 - DIAZ HERNANDEZ, HERBERTH SAMUEL">DIAZ HERNANDEZ, HERBERTH SAMUEL</option>
+                            <option value="20347344 - HENRIQUEZ SORTO, OLVIN YAHIR">HENRIQUEZ SORTO, OLVIN YAHIR</option>
+                            <option value="3562976 - MARTINEZ NOLASCO, ANA EMILIA">MARTINEZ NOLASCO, ANA EMILIA</option>
+                            <option value="20323201 - MORALES CASTRO, ROSA ELIZABETH">MORALES CASTRO, ROSA ELIZABETH</option>
+                            <option value="20229293 - RAMOS CASTILLO, FANNY LISBETH">RAMOS CASTILLO, FANNY LISBETH</option>
+                            <option value="20218602 - RAMOS DIAZ, ROSALINDA">RAMOS DIAZ, ROSALINDA</option>
+                            <option value="20218604 - RAMOS POSADA, GENESIS ABIGAIL">RAMOS POSADA, GENESIS ABIGAIL</option>
+                            <option value="20042845 - RAMOS REQUENO, DANIEL ALEXANDER">RAMOS REQUENO, DANIEL ALEXANDER</option>
+                            <option value="10289093 - RODRIGUEZ SALMERON, CARLOS FABRICIO">RODRIGUEZ SALMERON, CARLOS FABRICIO</option>
+                            <option value="2786491 - ROMERO POSADA, HASLIN DAYANA">ROMERO POSADA, HASLIN DAYANA</option>
+                            <option value="19947414 - SAGASTUME LOVO, NIXON EDGARDO">SAGASTUME LOVO, NIXON EDGARDO</option>
+                            <option value="20042871 - SORTO AMAYA, OSCAR EZEQUIEL">SORTO AMAYA, OSCAR EZEQUIEL</option>
+                            <option value="20218617 - SORTO ARGUETA, ALAN SAMIR">SORTO ARGUETA, ALAN SAMIR</option>
+                        </select>
+                    </div>
+                    <input type="hidden" name="02_Seccion" value="9no A - Vespertino">
+                    <button type="button" class="btn-nav" onclick="goToTab('registro-i1', 'lectura', 'tab-lectura')">Continuar a Lectura ➔</button>
+                    <div style="clear:both;"></div>
                 </div>
-                <input type="hidden" name="02_Seccion" value="9no A - Vespertino">
-                <button type="button" class="btn-nav" onclick="openTab('lectura', 1)">Continuar a Lectura ➔</button>
-                <div style="clear:both;"></div>
             </div>
 
             <div id="lectura" class="tab-content">
                 <h2>Área de Comprensión Lectora</h2>
                 <p class="indicaciones">Lee atentamente las instrucciones de cada fase y haz lo que se te pide.</p>
                 
-                <h3>Ítem 1: El avaro y su oro</h3>
-                <div class="reading-box">
-                    Un avaro vendió todo lo que tenía y, con el dinero que ganó, compró una pieza de oro. Para que nadie más la viera, la enterró a la orilla de un camino. Todos los días iba a mirar el sitio. Uno de sus vecinos observó sus frecuentes visitas al lugar y decidió averiguar qué pasaba. Pronto descubrió el escondite y tomó el oro. El avaro, en su siguiente visita, encontró el hueco vacío y se lamentó amargamente...
-                </div>
-                
-                <div class="fase-title">Fase 1: Anticipa</div>
-                <p class="indicaciones">Antes de leer el texto, lee el título y mira con atención la imagen. Responde:</p>
-                <div class="question-block"><label>1. ¿Qué ves en la imagen? Descríbela con detalles.</label><textarea name="L1_Q1" rows="2" required></textarea></div>
-                <div class="question-block"><label>2. Tomando en cuenta la imagen y el título, ¿de qué crees que tratará el texto?</label><textarea name="L1_Q2" rows="2" required></textarea></div>
-                
-                <div class="fase-title">Fase 2: Busca información</div>
-                <p class="indicaciones">Responde con base en el texto:</p>
-                <div class="question-block"><label>3. «Escanea» visualmente el texto para identificar las palabras clave. ¿Cuáles encontraste?</label><input type="text" name="L1_Q3" required></div>
-                <div class="question-block"><label>4. ¿Dónde enterró el avaro su oro?</label><input type="text" name="L1_Q4" required></div>
-                <div class="question-block"><label>5. ¿Cómo descubrió el vecino el escondite?</label><textarea name="L1_Q5" rows="2" required></textarea></div>
-                
-                <div class="fase-title">Fase 3: Comprende</div>
-                <p class="indicaciones">Responde:</p>
-                <div class="question-block"><label>6. ¿Cuál es la idea principal del texto?</label><textarea name="L1_Q6" rows="2" required></textarea></div>
-                
-                <div class="rating-container">
-                    <div class="rating-header">
-                        <h4>Autoevaluación Ítem 1</h4>
-                        <p>En una escala del 1 al 5 (siendo 5 la dificultad más alta), valora la dificultad de cada pregunta:</p>
+                <div id="lectura-i1">
+                    <h3>Ítem 1: El avaro y su oro</h3>
+                    <div class="reading-box">
+                        Un avaro vendió todo lo que tenía y, con el dinero que ganó, compró una pieza de oro. Para que nadie más la viera, la enterró a la orilla de un camino. Todos los días iba a mirar el sitio. Uno de sus vecinos observó sus frecuentes visitas al lugar y decidió averiguar qué pasaba. Pronto descubrió el escondite y tomó el oro. El avaro, en su siguiente visita, encontró el hueco vacío y se lamentó amargamente...
                     </div>
                     
-                    <div class="rating-row">
-                        <span>Pregunta 1</span>
-                        <div class="star-rating">
-                            <input type="radio" id="l1_q1_5" name="L1_Eval_P1" value="5" required/><label for="l1_q1_5" class="star">★</label>
-                            <input type="radio" id="l1_q1_4" name="L1_Eval_P1" value="4"/><label for="l1_q1_4" class="star">★</label>
-                            <input type="radio" id="l1_q1_3" name="L1_Eval_P1" value="3"/><label for="l1_q1_3" class="star">★</label>
-                            <input type="radio" id="l1_q1_2" name="L1_Eval_P1" value="2"/><label for="l1_q1_2" class="star">★</label>
-                            <input type="radio" id="l1_q1_1" name="L1_Eval_P1" value="1"/><label for="l1_q1_1" class="star">★</label>
-                        </div>
-                    </div>
-                    <div class="rating-row">
-                        <span>Pregunta 2</span>
-                        <div class="star-rating">
-                            <input type="radio" id="l1_q2_5" name="L1_Eval_P2" value="5" required/><label for="l1_q2_5" class="star">★</label>
-                            <input type="radio" id="l1_q2_4" name="L1_Eval_P2" value="4"/><label for="l1_q2_4" class="star">★</label>
-                            <input type="radio" id="l1_q2_3" name="L1_Eval_P2" value="3"/><label for="l1_q2_3" class="star">★</label>
-                            <input type="radio" id="l1_q2_2" name="L1_Eval_P2" value="2"/><label for="l1_q2_2" class="star">★</label>
-                            <input type="radio" id="l1_q2_1" name="L1_Eval_P2" value="1"/><label for="l1_q2_1" class="star">★</label>
-                        </div>
-                    </div>
-                    <div class="rating-row">
-                        <span>Pregunta 3</span>
-                        <div class="star-rating">
-                            <input type="radio" id="l1_q3_5" name="L1_Eval_P3" value="5" required/><label for="l1_q3_5" class="star">★</label>
-                            <input type="radio" id="l1_q3_4" name="L1_Eval_P3" value="4"/><label for="l1_q3_4" class="star">★</label>
-                            <input type="radio" id="l1_q3_3" name="L1_Eval_P3" value="3"/><label for="l1_q3_3" class="star">★</label>
-                            <input type="radio" id="l1_q3_2" name="L1_Eval_P3" value="2"/><label for="l1_q3_2" class="star">★</label>
-                            <input type="radio" id="l1_q3_1" name="L1_Eval_P3" value="1"/><label for="l1_q3_1" class="star">★</label>
-                        </div>
-                    </div>
-                    <div class="rating-row">
-                        <span>Pregunta 4</span>
-                        <div class="star-rating">
-                            <input type="radio" id="l1_q4_5" name="L1_Eval_P4" value="5" required/><label for="l1_q4_5" class="star">★</label>
-                            <input type="radio" id="l1_q4_4" name="L1_Eval_P4" value="4"/><label for="l1_q4_4" class="star">★</label>
-                            <input type="radio" id="l1_q4_3" name="L1_Eval_P4" value="3"/><label for="l1_q4_3" class="star">★</label>
-                            <input type="radio" id="l1_q4_2" name="L1_Eval_P4" value="2"/><label for="l1_q4_2" class="star">★</label>
-                            <input type="radio" id="l1_q4_1" name="L1_Eval_P4" value="1"/><label for="l1_q4_1" class="star">★</label>
-                        </div>
-                    </div>
-                    <div class="rating-row">
-                        <span>Pregunta 5</span>
-                        <div class="star-rating">
-                            <input type="radio" id="l1_q5_5" name="L1_Eval_P5" value="5" required/><label for="l1_q5_5" class="star">★</label>
-                            <input type="radio" id="l1_q5_4" name="L1_Eval_P5" value="4"/><label for="l1_q5_4" class="star">★</label>
-                            <input type="radio" id="l1_q5_3" name="L1_Eval_P5" value="3"/><label for="l1_q5_3" class="star">★</label>
-                            <input type="radio" id="l1_q5_2" name="L1_Eval_P5" value="2"/><label for="l1_q5_2" class="star">★</label>
-                            <input type="radio" id="l1_q5_1" name="L1_Eval_P5" value="1"/><label for="l1_q5_1" class="star">★</label>
-                        </div>
-                    </div>
-                    <div class="rating-row">
-                        <span>Pregunta 6</span>
-                        <div class="star-rating">
-                            <input type="radio" id="l1_q6_5" name="L1_Eval_P6" value="5" required/><label for="l1_q6_5" class="star">★</label>
-                            <input type="radio" id="l1_q6_4" name="L1_Eval_P6" value="4"/><label for="l1_q6_4" class="star">★</label>
-                            <input type="radio" id="l1_q6_3" name="L1_Eval_P6" value="3"/><label for="l1_q6_3" class="star">★</label>
-                            <input type="radio" id="l1_q6_2" name="L1_Eval_P6" value="2"/><label for="l1_q6_2" class="star">★</label>
-                            <input type="radio" id="l1_q6_1" name="L1_Eval_P6" value="1"/><label for="l1_q6_1" class="star">★</label>
-                        </div>
-                    </div>
+                    <div class="fase-title">Fase 1: Anticipa</div>
+                    <div class="question-block"><label>1. ¿Qué ves en la imagen? Descríbela con detalles.</label><textarea name="L1_Q1" rows="2" required></textarea></div>
+                    <div class="question-block"><label>2. Tomando en cuenta la imagen y el título, ¿de qué crees que tratará el texto?</label><textarea name="L1_Q2" rows="2" required></textarea></div>
                     
-                    <label style="margin-top: 15px;">¿Por qué escogiste ese nivel de dificultad en general?</label>
-                    <textarea name="L1_Justificacion" rows="2" required></textarea>
-                </div>
-
-                <hr style="border-top:1px solid var(--border-color); margin: 30px 0;">
-
-                <h3>Ítem 2: La leche de vaca</h3>
-                <div class="reading-box">
-                    Los productos lácteos de La Granja Lechera contienen nutrientes fundamentales como calcio, proteínas, vitamina D, vitamina B12, riboflavinas y potasio... Según Bill Sears, la leche reúne muchos nutrientes importantes. La Asociación Internacional de Productos Lácteos (AIPL) respalda esta afirmación...
-                </div>
-
-                <div class="fase-title">Fase 1: Anticipa</div>
-                <p class="indicaciones">Antes de leer el texto, lee el título y mira con atención los elementos gráficos. Responde:</p>
-                <div class="question-block"><label>1. ¿Qué ves en los elementos gráficos que acompañan el texto? Descríbelos con detalles.</label><textarea name="L2_Q1" rows="2" required></textarea></div>
-                <div class="question-block"><label>2. Tomando en cuenta la imagen y el título, ¿de qué crees que trata el texto?</label><textarea name="L2_Q2" rows="2" required></textarea></div>
-                
-                <div class="fase-title">Fase 2: Busca información</div>
-                <p class="indicaciones">Haz lo que se te pide:</p>
-                <div class="question-block"><label>3. «Escanea» visualmente el texto para identificar las palabras clave. ¿Cuáles encontraste?</label><input type="text" name="L2_Q3" required></div>
-                <div class="question-block">
-                    <label>4. Según la Asociación Internacional de Productos Lácteos, ¿con qué afirmación están de acuerdo las organizaciones y los profesionales de la salud?</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="L2_Q4" value="A" required> A. Consumir leche y productos lácteos puede producir obesidad.</label>
-                        <label><input type="radio" name="L2_Q4" value="B"> B. La leche es una buena fuente de vitaminas y minerales esenciales.</label>
-                        <label><input type="radio" name="L2_Q4" value="C"> C. La leche contiene más vitaminas que minerales.</label>
-                        <label><input type="radio" name="L2_Q4" value="D"> D. El consumo de leche es una causa importante de osteoporosis.</label>
-                    </div>
-                </div>
-
-                <div class="fase-title">Fase 3: Comprende</div>
-                <p class="indicaciones">Responde:</p>
-                <div class="question-block"><label>5. ¿Cuál es la idea principal del texto?</label><textarea name="L2_Q5" rows="2" required></textarea></div>
-
-                <div class="rating-container">
-                    <div class="rating-header">
-                        <h4>Autoevaluación Ítem 2</h4>
-                        <p>En una escala del 1 al 5, valora la dificultad de cada pregunta:</p>
-                    </div>
-                    <div class="rating-row">
-                        <span>Pregunta 1</span>
-                        <div class="star-rating">
-                            <input type="radio" id="l2_q1_5" name="L2_Eval_P1" value="5" required/><label for="l2_q1_5" class="star">★</label>
-                            <input type="radio" id="l2_q1_4" name="L2_Eval_P1" value="4"/><label for="l2_q1_4" class="star">★</label>
-                            <input type="radio" id="l2_q1_3" name="L2_Eval_P1" value="3"/><label for="l2_q1_3" class="star">★</label>
-                            <input type="radio" id="l2_q1_2" name="L2_Eval_P1" value="2"/><label for="l2_q1_2" class="star">★</label>
-                            <input type="radio" id="l2_q1_1" name="L2_Eval_P1" value="1"/><label for="l2_q1_1" class="star">★</label>
-                        </div>
-                    </div>
-                    <div class="rating-row">
-                        <span>Pregunta 2</span>
-                        <div class="star-rating">
-                            <input type="radio" id="l2_q2_5" name="L2_Eval_P2" value="5" required/><label for="l2_q2_5" class="star">★</label>
-                            <input type="radio" id="l2_q2_4" name="L2_Eval_P2" value="4"/><label for="l2_q2_4" class="star">★</label>
-                            <input type="radio" id="l2_q2_3" name="L2_Eval_P2" value="3"/><label for="l2_q2_3" class="star">★</label>
-                            <input type="radio" id="l2_q2_2" name="L2_Eval_P2" value="2"/><label for="l2_q2_2" class="star">★</label>
-                            <input type="radio" id="l2_q2_1" name="L2_Eval_P2" value="1"/><label for="l2_q2_1" class="star">★</label>
-                        </div>
-                    </div>
-                    <div class="rating-row">
-                        <span>Pregunta 3</span>
-                        <div class="star-rating">
-                            <input type="radio" id="l2_q3_5" name="L2_Eval_P3" value="5" required/><label for="l2_q3_5" class="star">★</label>
-                            <input type="radio" id="l2_q3_4" name="L2_Eval_P3" value="4"/><label for="l2_q3_4" class="star">★</label>
-                            <input type="radio" id="l2_q3_3" name="L2_Eval_P3" value="3"/><label for="l2_q3_3" class="star">★</label>
-                            <input type="radio" id="l2_q3_2" name="L2_Eval_P3" value="2"/><label for="l2_q3_2" class="star">★</label>
-                            <input type="radio" id="l2_q3_1" name="L2_Eval_P3" value="1"/><label for="l2_q3_1" class="star">★</label>
-                        </div>
-                    </div>
-                    <div class="rating-row">
-                        <span>Pregunta 4</span>
-                        <div class="star-rating">
-                            <input type="radio" id="l2_q4_5" name="L2_Eval_P4" value="5" required/><label for="l2_q4_5" class="star">★</label>
-                            <input type="radio" id="l2_q4_4" name="L2_Eval_P4" value="4"/><label for="l2_q4_4" class="star">★</label>
-                            <input type="radio" id="l2_q4_3" name="L2_Eval_P4" value="3"/><label for="l2_q4_3" class="star">★</label>
-                            <input type="radio" id="l2_q4_2" name="L2_Eval_P4" value="2"/><label for="l2_q4_2" class="star">★</label>
-                            <input type="radio" id="l2_q4_1" name="L2_Eval_P4" value="1"/><label for="l2_q4_1" class="star">★</label>
-                        </div>
-                    </div>
-                    <div class="rating-row">
-                        <span>Pregunta 5</span>
-                        <div class="star-rating">
-                            <input type="radio" id="l2_q5_5" name="L2_Eval_P5" value="5" required/><label for="l2_q5_5" class="star">★</label>
-                            <input type="radio" id="l2_q5_4" name="L2_Eval_P5" value="4"/><label for="l2_q5_4" class="star">★</label>
-                            <input type="radio" id="l2_q5_3" name="L2_Eval_P5" value="3"/><label for="l2_q5_3" class="star">★</label>
-                            <input type="radio" id="l2_q5_2" name="L2_Eval_P5" value="2"/><label for="l2_q5_2" class="star">★</label>
-                            <input type="radio" id="l2_q5_1" name="L2_Eval_P5" value="1"/><label for="l2_q5_1" class="star">★</label>
-                        </div>
-                    </div>
+                    <div class="fase-title">Fase 2: Busca información</div>
+                    <div class="question-block"><label>3. «Escanea» visualmente el texto para identificar las palabras clave. ¿Cuáles encontraste?</label><input type="text" name="L1_Q3" required></div>
+                    <div class="question-block"><label>4. ¿Dónde enterró el avaro su oro?</label><input type="text" name="L1_Q4" required></div>
+                    <div class="question-block"><label>5. ¿Cómo descubrió el vecino el escondite?</label><textarea name="L1_Q5" rows="2" required></textarea></div>
                     
-                    <label style="margin-top: 15px;">¿Por qué escogiste ese nivel de dificultad en general?</label>
-                    <textarea name="L2_Justificacion" rows="2" required></textarea>
+                    <div class="fase-title">Fase 3: Comprende</div>
+                    <div class="question-block"><label>6. ¿Cuál es la idea principal del texto?</label><textarea name="L1_Q6" rows="2" required></textarea></div>
+                    
+                    <div class="rating-container">
+                        <div class="rating-header">
+                            <h4>Autoevaluación Ítem 1</h4>
+                            <p>En una escala del 1 al 5 (siendo 5 la dificultad más alta), valora la dificultad de cada pregunta:</p>
+                        </div>
+                        <div class="rating-row"><span>Pregunta 1</span><div class="star-rating"><input type="radio" id="l1_q1_5" name="L1_Eval_P1" value="5" required/><label for="l1_q1_5" class="star">★</label><input type="radio" id="l1_q1_4" name="L1_Eval_P1" value="4"/><label for="l1_q1_4" class="star">★</label><input type="radio" id="l1_q1_3" name="L1_Eval_P1" value="3"/><label for="l1_q1_3" class="star">★</label><input type="radio" id="l1_q1_2" name="L1_Eval_P1" value="2"/><label for="l1_q1_2" class="star">★</label><input type="radio" id="l1_q1_1" name="L1_Eval_P1" value="1"/><label for="l1_q1_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 2</span><div class="star-rating"><input type="radio" id="l1_q2_5" name="L1_Eval_P2" value="5" required/><label for="l1_q2_5" class="star">★</label><input type="radio" id="l1_q2_4" name="L1_Eval_P2" value="4"/><label for="l1_q2_4" class="star">★</label><input type="radio" id="l1_q2_3" name="L1_Eval_P2" value="3"/><label for="l1_q2_3" class="star">★</label><input type="radio" id="l1_q2_2" name="L1_Eval_P2" value="2"/><label for="l1_q2_2" class="star">★</label><input type="radio" id="l1_q2_1" name="L1_Eval_P2" value="1"/><label for="l1_q2_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 3</span><div class="star-rating"><input type="radio" id="l1_q3_5" name="L1_Eval_P3" value="5" required/><label for="l1_q3_5" class="star">★</label><input type="radio" id="l1_q3_4" name="L1_Eval_P3" value="4"/><label for="l1_q3_4" class="star">★</label><input type="radio" id="l1_q3_3" name="L1_Eval_P3" value="3"/><label for="l1_q3_3" class="star">★</label><input type="radio" id="l1_q3_2" name="L1_Eval_P3" value="2"/><label for="l1_q3_2" class="star">★</label><input type="radio" id="l1_q3_1" name="L1_Eval_P3" value="1"/><label for="l1_q3_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 4</span><div class="star-rating"><input type="radio" id="l1_q4_5" name="L1_Eval_P4" value="5" required/><label for="l1_q4_5" class="star">★</label><input type="radio" id="l1_q4_4" name="L1_Eval_P4" value="4"/><label for="l1_q4_4" class="star">★</label><input type="radio" id="l1_q4_3" name="L1_Eval_P4" value="3"/><label for="l1_q4_3" class="star">★</label><input type="radio" id="l1_q4_2" name="L1_Eval_P4" value="2"/><label for="l1_q4_2" class="star">★</label><input type="radio" id="l1_q4_1" name="L1_Eval_P4" value="1"/><label for="l1_q4_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 5</span><div class="star-rating"><input type="radio" id="l1_q5_5" name="L1_Eval_P5" value="5" required/><label for="l1_q5_5" class="star">★</label><input type="radio" id="l1_q5_4" name="L1_Eval_P5" value="4"/><label for="l1_q5_4" class="star">★</label><input type="radio" id="l1_q5_3" name="L1_Eval_P5" value="3"/><label for="l1_q5_3" class="star">★</label><input type="radio" id="l1_q5_2" name="L1_Eval_P5" value="2"/><label for="l1_q5_2" class="star">★</label><input type="radio" id="l1_q5_1" name="L1_Eval_P5" value="1"/><label for="l1_q5_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 6</span><div class="star-rating"><input type="radio" id="l1_q6_5" name="L1_Eval_P6" value="5" required/><label for="l1_q6_5" class="star">★</label><input type="radio" id="l1_q6_4" name="L1_Eval_P6" value="4"/><label for="l1_q6_4" class="star">★</label><input type="radio" id="l1_q6_3" name="L1_Eval_P6" value="3"/><label for="l1_q6_3" class="star">★</label><input type="radio" id="l1_q6_2" name="L1_Eval_P6" value="2"/><label for="l1_q6_2" class="star">★</label><input type="radio" id="l1_q6_1" name="L1_Eval_P6" value="1"/><label for="l1_q6_1" class="star">★</label></div></div>
+                        
+                        <label style="margin-top: 15px;">¿Por qué escogiste ese nivel de dificultad en general?</label>
+                        <textarea name="L1_Justificacion" rows="2" required></textarea>
+                    </div>
+
+                    <button type="button" class="btn-nav" onclick="goToItem('lectura-i1', 'lectura-i2')">Siguiente Ítem (Lectura 2) ➔</button>
+                    <div style="clear:both;"></div>
                 </div>
 
-                <button type="button" class="btn-nav" onclick="openTab('matematica', 2)">Continuar a Matemática ➔</button>
-                <div style="clear:both;"></div>
+                <div id="lectura-i2" style="display:none;">
+                    <hr style="border-top:1px solid var(--border-color); margin: 10px 0 30px;">
+                    <h3>Ítem 2: La leche de vaca</h3>
+                    <div class="reading-box">
+                        Los productos lácteos de La Granja Lechera contienen nutrientes fundamentales como calcio, proteínas, vitamina D, vitamina B12, riboflavinas y potasio... Según Bill Sears, la leche reúne muchos nutrientes importantes. La Asociación Internacional de Productos Lácteos (AIPL) respalda esta afirmación...
+                    </div>
+
+                    <div class="fase-title">Fase 1: Anticipa</div>
+                    <div class="question-block"><label>1. ¿Qué ves en los elementos gráficos que acompañan el texto?</label><textarea name="L2_Q1" rows="2" required></textarea></div>
+                    <div class="question-block"><label>2. Tomando en cuenta la imagen y el título, ¿de qué crees que trata el texto?</label><textarea name="L2_Q2" rows="2" required></textarea></div>
+                    
+                    <div class="fase-title">Fase 2: Busca información</div>
+                    <div class="question-block"><label>3. «Escanea» visualmente el texto para identificar las palabras clave. ¿Cuáles encontraste?</label><input type="text" name="L2_Q3" required></div>
+                    <div class="question-block">
+                        <label>4. Según la Asociación Internacional de Productos Lácteos, ¿con qué afirmación están de acuerdo las organizaciones y los profesionales de la salud?</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="L2_Q4" value="A" required> A. Consumir leche y productos lácteos puede producir obesidad.</label>
+                            <label><input type="radio" name="L2_Q4" value="B"> B. La leche es una buena fuente de vitaminas y minerales esenciales.</label>
+                            <label><input type="radio" name="L2_Q4" value="C"> C. La leche contiene más vitaminas que minerales.</label>
+                            <label><input type="radio" name="L2_Q4" value="D"> D. El consumo de leche es una causa importante de osteoporosis.</label>
+                        </div>
+                    </div>
+
+                    <div class="fase-title">Fase 3: Comprende</div>
+                    <div class="question-block"><label>5. ¿Cuál es la idea principal del texto?</label><textarea name="L2_Q5" rows="2" required></textarea></div>
+
+                    <div class="rating-container">
+                        <div class="rating-header">
+                            <h4>Autoevaluación Ítem 2</h4>
+                            <p>En una escala del 1 al 5, valora la dificultad de cada pregunta:</p>
+                        </div>
+                        <div class="rating-row"><span>Pregunta 1</span><div class="star-rating"><input type="radio" id="l2_q1_5" name="L2_Eval_P1" value="5" required/><label for="l2_q1_5" class="star">★</label><input type="radio" id="l2_q1_4" name="L2_Eval_P1" value="4"/><label for="l2_q1_4" class="star">★</label><input type="radio" id="l2_q1_3" name="L2_Eval_P1" value="3"/><label for="l2_q1_3" class="star">★</label><input type="radio" id="l2_q1_2" name="L2_Eval_P1" value="2"/><label for="l2_q1_2" class="star">★</label><input type="radio" id="l2_q1_1" name="L2_Eval_P1" value="1"/><label for="l2_q1_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 2</span><div class="star-rating"><input type="radio" id="l2_q2_5" name="L2_Eval_P2" value="5" required/><label for="l2_q2_5" class="star">★</label><input type="radio" id="l2_q2_4" name="L2_Eval_P2" value="4"/><label for="l2_q2_4" class="star">★</label><input type="radio" id="l2_q2_3" name="L2_Eval_P2" value="3"/><label for="l2_q2_3" class="star">★</label><input type="radio" id="l2_q2_2" name="L2_Eval_P2" value="2"/><label for="l2_q2_2" class="star">★</label><input type="radio" id="l2_q2_1" name="L2_Eval_P2" value="1"/><label for="l2_q2_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 3</span><div class="star-rating"><input type="radio" id="l2_q3_5" name="L2_Eval_P3" value="5" required/><label for="l2_q3_5" class="star">★</label><input type="radio" id="l2_q3_4" name="L2_Eval_P3" value="4"/><label for="l2_q3_4" class="star">★</label><input type="radio" id="l2_q3_3" name="L2_Eval_P3" value="3"/><label for="l2_q3_3" class="star">★</label><input type="radio" id="l2_q3_2" name="L2_Eval_P3" value="2"/><label for="l2_q3_2" class="star">★</label><input type="radio" id="l2_q3_1" name="L2_Eval_P3" value="1"/><label for="l2_q3_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 4</span><div class="star-rating"><input type="radio" id="l2_q4_5" name="L2_Eval_P4" value="5" required/><label for="l2_q4_5" class="star">★</label><input type="radio" id="l2_q4_4" name="L2_Eval_P4" value="4"/><label for="l2_q4_4" class="star">★</label><input type="radio" id="l2_q4_3" name="L2_Eval_P4" value="3"/><label for="l2_q4_3" class="star">★</label><input type="radio" id="l2_q4_2" name="L2_Eval_P4" value="2"/><label for="l2_q4_2" class="star">★</label><input type="radio" id="l2_q4_1" name="L2_Eval_P4" value="1"/><label for="l2_q4_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 5</span><div class="star-rating"><input type="radio" id="l2_q5_5" name="L2_Eval_P5" value="5" required/><label for="l2_q5_5" class="star">★</label><input type="radio" id="l2_q5_4" name="L2_Eval_P5" value="4"/><label for="l2_q5_4" class="star">★</label><input type="radio" id="l2_q5_3" name="L2_Eval_P5" value="3"/><label for="l2_q5_3" class="star">★</label><input type="radio" id="l2_q5_2" name="L2_Eval_P5" value="2"/><label for="l2_q5_2" class="star">★</label><input type="radio" id="l2_q5_1" name="L2_Eval_P5" value="1"/><label for="l2_q5_1" class="star">★</label></div></div>
+                        
+                        <label style="margin-top: 15px;">¿Por qué escogiste ese nivel de dificultad en general?</label>
+                        <textarea name="L2_Justificacion" rows="2" required></textarea>
+                    </div>
+
+                    <button type="button" class="btn-nav" onclick="goToTab('lectura-i2', 'matematica', 'tab-matematica')">Continuar a Matemática ➔</button>
+                    <div style="clear:both;"></div>
+                </div>
             </div>
 
             <div id="matematica" class="tab-content">
                 <h2>Área de Matemática</h2>
                 
-                <h3>Ítem 1: Pruebas de Inteligencia Artificial</h3>
-                <div class="reading-box">
-                    En la escuela de Tatiana, el profesor de Inteligencia Artificial califica las pruebas usando una escala de 100 puntos. Tatiana tiene un promedio de 60 puntos en sus primeras 4 pruebas. En la quinta prueba obtiene 80 puntos. ¿Cuál es el promedio de sus notas de Inteligencia Artificial después de las 5 pruebas?
-                </div>
-                
-                <div class="question-block">
-                    <label style="color:var(--accent); font-size:1.1rem;">Promedio Final:</label>
-                    <input type="number" name="M1_Promedio_Directo" placeholder="Escribe aquí tu respuesta final..." required>
-                </div>
-
-                <p class="indicaciones" style="margin-top:30px;"><strong>Indicaciones:</strong> Para resolver el problema sigue esta estrategia de 4 fases.</p>
-
-                <div class="fase-title">Fase 1: El desafío</div>
-                <p class="indicaciones">Conecta con la situación e imagina que esas notas son tuyas. Lee el problema con atención.</p>
-                <div class="question-block"><label>1. ¿Qué datos te brinda el problema?</label><textarea name="M1_Q1" rows="2" required></textarea></div>
-                <div class="question-block"><label>2. ¿Qué te pide el problema?</label><input type="text" name="M1_Q2" required></div>
-                
-                <div class="fase-title">Fase 2: La caja de herramientas</div>
-                <p class="indicaciones">Ahora que identificaste los datos, responde:</p>
-                <div class="question-block"><label>3. ¿Qué contenido de Matemática y herramientas (operaciones) usarás?</label><textarea name="M1_Q3" rows="2" required></textarea></div>
-                
-                <div class="fase-title">Fase 3: Aplicación al mundo real</div>
-                <p class="indicaciones">Aplica los procedimientos que conoces.</p>
-                <div class="question-block"><label>4. Desarrolla y escribe tu Respuesta:</label><textarea name="M1_Q4" rows="3" required></textarea></div>
-                
-                <div class="fase-title">Fase 4: Validación de resultados</div>
-                <p class="indicaciones">Verifica tus resultados.</p>
-                <div class="question-block"><label>5. ¿El resultado es razonable en la vida real? ¿Por qué?</label><textarea name="M1_Q5" rows="2" required></textarea></div>
-                
-                <div class="rating-container">
-                    <div class="rating-header">
-                        <h4>Autoevaluación Ítem 1 (Global)</h4>
-                        <p>En la escala del 1 al 5, marca el grado de dificultad que le darías a la resolución general de este ejercicio.</p>
+                <div id="mate-i1">
+                    <h3>Ítem 1: Pruebas de Inteligencia Artificial</h3>
+                    <div class="reading-box">
+                        En la escuela de Tatiana, el profesor de Inteligencia Artificial califica las pruebas usando una escala de 100 puntos. Tatiana tiene un promedio de 60 puntos en sus primeras 4 pruebas. En la quinta prueba obtiene 80 puntos. ¿Cuál es el promedio de sus notas de Inteligencia Artificial después de las 5 pruebas?
                     </div>
-                    <div class="rating-row">
-                        <span>Nivel de dificultad</span>
-                        <div class="star-rating">
-                            <input type="radio" id="m1_q1_5" name="M1_Eval_Global" value="5" required/><label for="m1_q1_5" class="star">★</label>
-                            <input type="radio" id="m1_q1_4" name="M1_Eval_Global" value="4"/><label for="m1_q1_4" class="star">★</label>
-                            <input type="radio" id="m1_q1_3" name="M1_Eval_Global" value="3"/><label for="m1_q1_3" class="star">★</label>
-                            <input type="radio" id="m1_q1_2" name="M1_Eval_Global" value="2"/><label for="m1_q1_2" class="star">★</label>
-                            <input type="radio" id="m1_q1_1" name="M1_Eval_Global" value="1"/><label for="m1_q1_1" class="star">★</label>
+                    
+                    <div class="question-block">
+                        <label style="color:var(--accent); font-size:1.1rem;">Promedio Final:</label>
+                        <input type="number" name="M1_Promedio_Directo" placeholder="Escribe aquí tu respuesta final (solo el número)..." required>
+                    </div>
+
+                    <p class="indicaciones" style="margin-top:30px;"><strong>Indicaciones:</strong> Para resolver el problema sigue esta estrategia de 4 fases.</p>
+
+                    <div class="fase-title">Fase 1: El desafío</div>
+                    <div class="question-block"><label>1. ¿Qué datos te brinda el problema?</label><textarea name="M1_Q1" rows="2" required></textarea></div>
+                    <div class="question-block"><label>2. ¿Qué te pide el problema?</label><input type="text" name="M1_Q2" required></div>
+                    
+                    <div class="fase-title">Fase 2: La caja de herramientas</div>
+                    <div class="question-block"><label>3. ¿Qué contenido de Matemática y herramientas (operaciones) usarás?</label><textarea name="M1_Q3" rows="2" required></textarea></div>
+                    
+                    <div class="fase-title">Fase 3: Aplicación al mundo real</div>
+                    <div class="question-block"><label>4. Desarrolla y escribe tu Respuesta:</label><textarea name="M1_Q4" rows="3" required></textarea></div>
+                    
+                    <div class="fase-title">Fase 4: Validación de resultados</div>
+                    <div class="question-block"><label>5. ¿El resultado es razonable en la vida real? ¿Por qué?</label><textarea name="M1_Q5" rows="2" required></textarea></div>
+                    
+                    <div class="rating-container">
+                        <div class="rating-header">
+                            <h4>Autoevaluación Ítem 1 (Global)</h4>
+                            <p>En la escala del 1 al 5, marca el grado de dificultad que le darías a la resolución general de este ejercicio.</p>
+                        </div>
+                        <div class="rating-row">
+                            <span>Nivel de dificultad</span>
+                            <div class="star-rating">
+                                <input type="radio" id="m1_q1_5" name="M1_Eval_Global" value="5" required/><label for="m1_q1_5" class="star">★</label>
+                                <input type="radio" id="m1_q1_4" name="M1_Eval_Global" value="4"/><label for="m1_q1_4" class="star">★</label>
+                                <input type="radio" id="m1_q1_3" name="M1_Eval_Global" value="3"/><label for="m1_q1_3" class="star">★</label>
+                                <input type="radio" id="m1_q1_2" name="M1_Eval_Global" value="2"/><label for="m1_q1_2" class="star">★</label>
+                                <input type="radio" id="m1_q1_1" name="M1_Eval_Global" value="1"/><label for="m1_q1_1" class="star">★</label>
+                            </div>
                         </div>
                     </div>
+
+                    <button type="button" class="btn-nav" onclick="goToItem('mate-i1', 'mate-i2')">Siguiente Ítem (Matemática 2) ➔</button>
+                    <div style="clear:both;"></div>
                 </div>
 
-                <hr style="border-top:1px solid var(--border-color); margin: 30px 0;">
-
-                <h3>Ítem 2: Factura de energía eléctrica</h3>
-                <div class="reading-box">
-                    En una comunidad, la empresa eléctrica cobra una cuota fija de $4.00 al mes por mantenimiento, más un cargo de $0.15 por cada kilovatio-hora (kWh) consumido. Si una familia consumió 150 kWh en el mes de marzo, ¿cuál es el monto total que aparece en su factura?
-                </div>
-                
-                <p class="indicaciones"><strong>Indicaciones:</strong> Lee con atención y sigue las fases para resolver el problema paso a paso.</p>
-
-                <div class="fase-title">Fase 1: El desafío</div>
-                <p class="indicaciones">Imagina que debes calcular el monto de la factura eléctrica de tu casa.</p>
-                <div class="question-block"><label>1. ¿Qué datos claves te brinda el problema?</label><textarea name="M2_Q1" rows="2" required></textarea></div>
-                <div class="question-block"><label>2. ¿Qué te está pidiendo el problema?</label><input type="text" name="M2_Q2" required></div>
-                
-                <div class="fase-title">Fase 2: La caja de herramientas</div>
-                <p class="indicaciones">Después de identificar los datos, responde:</p>
-                <div class="question-block"><label>3. ¿Qué contenido matemático y herramientas usarás?</label><textarea name="M2_Q3" rows="2" required></textarea></div>
-                
-                <div class="fase-title">Fase 3: Aplicación al mundo real</div>
-                <p class="indicaciones">Aplica tus conocimientos y procedimientos necesarios.</p>
-                <div class="question-block"><label>4. Desarrolla y escribe tu Respuesta:</label><textarea name="M2_Q4" rows="3" required></textarea></div>
-                
-                <div class="fase-title">Fase 4: Validación de resultados</div>
-                <p class="indicaciones">Verifica los resultados y responde:</p>
-                <div class="question-block"><label>5. ¿Es coherente tu respuesta? ¿Por qué?</label><textarea name="M2_Q5" rows="2" required></textarea></div>
-                
-                <div class="rating-container">
-                    <div class="rating-header">
-                        <h4>Autoevaluación Ítem 2 (Global)</h4>
-                        <p>En la escala del 1 al 5, marca el grado de dificultad que le darías a la resolución general de este ejercicio.</p>
+                <div id="mate-i2" style="display:none;">
+                    <hr style="border-top:1px solid var(--border-color); margin: 10px 0 30px;">
+                    <h3>Ítem 2: Factura de energía eléctrica</h3>
+                    <div class="reading-box">
+                        En una comunidad, la empresa eléctrica cobra una cuota fija de $4.00 al mes por mantenimiento, más un cargo de $0.15 por cada kilovatio-hora (kWh) consumido. Si una familia consumió 150 kWh en el mes de marzo, ¿cuál es el monto total que aparece en su factura?
                     </div>
-                    <div class="rating-row">
-                        <span>Nivel de dificultad</span>
-                        <div class="star-rating">
-                            <input type="radio" id="m2_q1_5" name="M2_Eval_Global" value="5" required/><label for="m2_q1_5" class="star">★</label>
-                            <input type="radio" id="m2_q1_4" name="M2_Eval_Global" value="4"/><label for="m2_q1_4" class="star">★</label>
-                            <input type="radio" id="m2_q1_3" name="M2_Eval_Global" value="3"/><label for="m2_q1_3" class="star">★</label>
-                            <input type="radio" id="m2_q1_2" name="M2_Eval_Global" value="2"/><label for="m2_q1_2" class="star">★</label>
-                            <input type="radio" id="m2_q1_1" name="M2_Eval_Global" value="1"/><label for="m2_q1_1" class="star">★</label>
+                    
+                    <p class="indicaciones"><strong>Indicaciones:</strong> Lee con atención y sigue las fases para resolver el problema paso a paso.</p>
+
+                    <div class="fase-title">Fase 1: El desafío</div>
+                    <div class="question-block"><label>1. ¿Qué datos claves te brinda el problema?</label><textarea name="M2_Q1" rows="2" required></textarea></div>
+                    <div class="question-block"><label>2. ¿Qué te está pidiendo el problema?</label><input type="text" name="M2_Q2" required></div>
+                    
+                    <div class="fase-title">Fase 2: La caja de herramientas</div>
+                    <div class="question-block"><label>3. ¿Qué contenido matemático y herramientas usarás?</label><textarea name="M2_Q3" rows="2" required></textarea></div>
+                    
+                    <div class="fase-title">Fase 3: Aplicación al mundo real</div>
+                    <div class="question-block"><label>4. Desarrolla y escribe tu Respuesta:</label><textarea name="M2_Q4" rows="3" required></textarea></div>
+                    
+                    <div class="fase-title">Fase 4: Validación de resultados</div>
+                    <div class="question-block"><label>5. ¿Es coherente tu respuesta? ¿Por qué?</label><textarea name="M2_Q5" rows="2" required></textarea></div>
+                    
+                    <div class="rating-container">
+                        <div class="rating-header">
+                            <h4>Autoevaluación Ítem 2 (Global)</h4>
+                            <p>En la escala del 1 al 5, marca el grado de dificultad que le darías a la resolución general de este ejercicio.</p>
+                        </div>
+                        <div class="rating-row">
+                            <span>Nivel de dificultad</span>
+                            <div class="star-rating">
+                                <input type="radio" id="m2_q1_5" name="M2_Eval_Global" value="5" required/><label for="m2_q1_5" class="star">★</label>
+                                <input type="radio" id="m2_q1_4" name="M2_Eval_Global" value="4"/><label for="m2_q1_4" class="star">★</label>
+                                <input type="radio" id="m2_q1_3" name="M2_Eval_Global" value="3"/><label for="m2_q1_3" class="star">★</label>
+                                <input type="radio" id="m2_q1_2" name="M2_Eval_Global" value="2"/><label for="m2_q1_2" class="star">★</label>
+                                <input type="radio" id="m2_q1_1" name="M2_Eval_Global" value="1"/><label for="m2_q1_1" class="star">★</label>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <button type="button" class="btn-nav" onclick="openTab('ciencias', 3)">Continuar a Ciencias ➔</button>
-                <div style="clear:both;"></div>
+                    <button type="button" class="btn-nav" onclick="goToTab('mate-i2', 'ciencias', 'tab-ciencias')">Continuar a Ciencias ➔</button>
+                    <div style="clear:both;"></div>
+                </div>
             </div>
 
             <div id="ciencias" class="tab-content">
                 <h2>Área de Ciencias</h2>
                 <p class="indicaciones">Lee detenidamente las indicaciones en cada fase y responde.</p>
 
-                <h3>Ítem 1: Migración de aves y evolución</h3>
-                <div class="reading-box">
-                    La migración de aves es un movimiento estacional a gran escala. Cada año, voluntarios cuentan aves y los científicos capturan algunas para marcar sus patas... Este comportamiento es resultado de la evolución.
-                </div>
-                
-                <div class="fase-title">Fase 1: Exploramos el fenómeno</div>
-                <p class="indicaciones">Conecta con la lectura e imagina que eres un científico que estudia aves.</p>
-                <div class="question-block"><label>1. ¿Qué tipo de fenómeno natural se describe en el texto?</label><input type="text" name="C1_Q1" required></div>
-                <div class="question-block"><label>2. ¿Qué hacen los científicos para estudiar a las aves?</label><textarea name="C1_Q2" rows="2" required></textarea></div>
-                
-                <div class="fase-title">Fase 2: Activamos herramientas científicas</div>
-                <p class="indicaciones">Aplica la estrategia de escaneo. Subraya palabras científicas desconocidas.</p>
-                <div class="question-block"><label>3. Escríbelas y explica qué crees que significan:</label><textarea name="C1_Q3" rows="2" required></textarea></div>
-
-                <div class="fase-title">Fase 3: Aplicamos y razonamos</div>
-                <p class="indicaciones">Lee nuevamente el texto y responde.</p>
-                <div class="question-block">
-                    <label>4. Según el texto, ¿qué hacen los voluntarios cada año?</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="C1_Q4" value="A" required> A. Capturan aves</label>
-                        <label><input type="radio" name="C1_Q4" value="B"> B. Marcan patas</label>
-                        <label><input type="radio" name="C1_Q4" value="C"> C. Cuentan aves</label>
-                        <label><input type="radio" name="C1_Q4" value="D"> D. Determinan rutas</label>
+                <div id="ciencia-i1">
+                    <h3>Ítem 1: Migración de aves y evolución</h3>
+                    <div class="reading-box">
+                        La migración de aves es un movimiento estacional a gran escala. Cada año, voluntarios cuentan aves y los científicos capturan algunas para marcar sus patas... Este comportamiento es resultado de la evolución.
                     </div>
-                </div>
+                    
+                    <div class="fase-title">Fase 1: Exploramos el fenómeno</div>
+                    <div class="question-block"><label>1. ¿Qué tipo de fenómeno natural se describe en el texto?</label><input type="text" name="C1_Q1" required></div>
+                    <div class="question-block"><label>2. ¿Qué hacen los científicos para estudiar a las aves?</label><textarea name="C1_Q2" rows="2" required></textarea></div>
+                    
+                    <div class="fase-title">Fase 2: Activamos herramientas científicas</div>
+                    <div class="question-block"><label>3. Subraya/Escribe palabras científicas desconocidas y explica qué crees que significan:</label><textarea name="C1_Q3" rows="2" required></textarea></div>
 
-                <div class="question-block">
-                    <label>5. ¿Por qué marcar aves ayuda a los científicos?</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="C1_Q5" value="A" required> A. Para reconocerlas en otros lugares</label>
-                        <label><input type="radio" name="C1_Q5" value="B"> B. Para que vuelen mejor</label>
-                        <label><input type="radio" name="C1_Q5" value="C"> C. Para evitar que migren</label>
-                        <label><input type="radio" name="C1_Q5" value="D"> D. Para distinguir machos y hembras</label>
+                    <div class="fase-title">Fase 3: Aplicamos y razonamos</div>
+                    <div class="question-block">
+                        <label>4. Según el texto, ¿qué hacen los voluntarios cada año?</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="C1_Q4" value="A" required> A. Capturan aves</label>
+                            <label><input type="radio" name="C1_Q4" value="B"> B. Marcan patas</label>
+                            <label><input type="radio" name="C1_Q4" value="C"> C. Cuentan aves</label>
+                            <label><input type="radio" name="C1_Q4" value="D"> D. Determinan rutas</label>
+                        </div>
                     </div>
-                </div>
 
-                <div class="question-block">
-                    <label>6. ¿Cuál es un beneficio de la eficiencia aerodinámica del vuelo en grupo?</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="C1_Q6" value="A" required> A. Ahorro de energía</label>
-                        <label><input type="radio" name="C1_Q6" value="B"> B. Conteo de aves</label>
-                        <label><input type="radio" name="C1_Q6" value="C"> C. Captura científica</label>
-                        <label><input type="radio" name="C1_Q6" value="D"> D. Protección de depredadores</label>
+                    <div class="question-block">
+                        <label>5. ¿Por qué marcar aves ayuda a los científicos?</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="C1_Q5" value="A" required> A. Para reconocerlas en otros lugares</label>
+                            <label><input type="radio" name="C1_Q5" value="B"> B. Para que vuelen mejor</label>
+                            <label><input type="radio" name="C1_Q5" value="C"> C. Para evitar que migren</label>
+                            <label><input type="radio" name="C1_Q5" value="D"> D. Para distinguir machos y hembras</label>
+                        </div>
                     </div>
-                </div>
 
-                <div class="question-block">
-                    <label>7. ¿Cuál es la idea principal plasmada en el texto?</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="C1_Q7" value="A" required> A. La importancia de voluntarios en el conteo anual de aves.</label>
-                        <label><input type="radio" name="C1_Q7" value="B"> B. Las ventajas evolutivas que favorecen la migración en grupo.</label>
-                        <label><input type="radio" name="C1_Q7" value="C"> C. La descripción de los instrumentos utilizados para marcar aves.</label>
-                        <label><input type="radio" name="C1_Q7" value="D"> D. El ahorro de energía como única causa del movimiento.</label>
+                    <div class="question-block">
+                        <label>6. ¿Cuál es un beneficio de la eficiencia aerodinámica del vuelo en grupo?</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="C1_Q6" value="A" required> A. Ahorro de energía</label>
+                            <label><input type="radio" name="C1_Q6" value="B"> B. Conteo de aves</label>
+                            <label><input type="radio" name="C1_Q6" value="C"> C. Captura científica</label>
+                            <label><input type="radio" name="C1_Q6" value="D"> D. Protección de depredadores</label>
+                        </div>
                     </div>
-                </div>
 
-                <div class="fase-title">Fase 4: Evaluamos nuestras conclusiones</div>
-                <p class="indicaciones">Reflexiona sobre tu trabajo.</p>
-                <div class="question-block"><label>8. ¿Tus respuestas se apoyan en evidencias del texto? Justifica.</label><textarea name="C1_Q8" rows="2" required></textarea></div>
-                <div class="question-block"><label>9. Si una especie dejara de migrar en grupo, ¿qué riesgos podría enfrentar?</label><textarea name="C1_Q9" rows="2" required></textarea></div>
-                
-                <div class="rating-container">
-                    <div class="rating-header">
-                        <h4>Autoevaluación Ítem 1 (Ciencias)</h4>
-                        <p>Valora la dificultad de cada pregunta de este bloque:</p>
+                    <div class="question-block">
+                        <label>7. ¿Cuál es la idea principal plasmada en el texto?</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="C1_Q7" value="A" required> A. La importancia de voluntarios en el conteo anual de aves.</label>
+                            <label><input type="radio" name="C1_Q7" value="B"> B. Las ventajas evolutivas que favorecen la migración en grupo.</label>
+                            <label><input type="radio" name="C1_Q7" value="C"> C. La descripción de los instrumentos utilizados para marcar aves.</label>
+                            <label><input type="radio" name="C1_Q7" value="D"> D. El ahorro de energía como única causa del movimiento.</label>
+                        </div>
                     </div>
-                    <div class="rating-row"><span>Pregunta 1</span><div class="star-rating"><input type="radio" id="c1_q1_5" name="C1_Eval_P1" value="5" required/><label for="c1_q1_5" class="star">★</label><input type="radio" id="c1_q1_4" name="C1_Eval_P1" value="4"/><label for="c1_q1_4" class="star">★</label><input type="radio" id="c1_q1_3" name="C1_Eval_P1" value="3"/><label for="c1_q1_3" class="star">★</label><input type="radio" id="c1_q1_2" name="C1_Eval_P1" value="2"/><label for="c1_q1_2" class="star">★</label><input type="radio" id="c1_q1_1" name="C1_Eval_P1" value="1"/><label for="c1_q1_1" class="star">★</label></div></div>
-                    <div class="rating-row"><span>Pregunta 2</span><div class="star-rating"><input type="radio" id="c1_q2_5" name="C1_Eval_P2" value="5" required/><label for="c1_q2_5" class="star">★</label><input type="radio" id="c1_q2_4" name="C1_Eval_P2" value="4"/><label for="c1_q2_4" class="star">★</label><input type="radio" id="c1_q2_3" name="C1_Eval_P2" value="3"/><label for="c1_q2_3" class="star">★</label><input type="radio" id="c1_q2_2" name="C1_Eval_P2" value="2"/><label for="c1_q2_2" class="star">★</label><input type="radio" id="c1_q2_1" name="C1_Eval_P2" value="1"/><label for="c1_q2_1" class="star">★</label></div></div>
-                    <div class="rating-row"><span>Pregunta 3</span><div class="star-rating"><input type="radio" id="c1_q3_5" name="C1_Eval_P3" value="5" required/><label for="c1_q3_5" class="star">★</label><input type="radio" id="c1_q3_4" name="C1_Eval_P3" value="4"/><label for="c1_q3_4" class="star">★</label><input type="radio" id="c1_q3_3" name="C1_Eval_P3" value="3"/><label for="c1_q3_3" class="star">★</label><input type="radio" id="c1_q3_2" name="C1_Eval_P3" value="2"/><label for="c1_q3_2" class="star">★</label><input type="radio" id="c1_q3_1" name="C1_Eval_P3" value="1"/><label for="c1_q3_1" class="star">★</label></div></div>
-                    <div class="rating-row"><span>Pregunta 4</span><div class="star-rating"><input type="radio" id="c1_q4_5" name="C1_Eval_P4" value="5" required/><label for="c1_q4_5" class="star">★</label><input type="radio" id="c1_q4_4" name="C1_Eval_P4" value="4"/><label for="c1_q4_4" class="star">★</label><input type="radio" id="c1_q4_3" name="C1_Eval_P4" value="3"/><label for="c1_q4_3" class="star">★</label><input type="radio" id="c1_q4_2" name="C1_Eval_P4" value="2"/><label for="c1_q4_2" class="star">★</label><input type="radio" id="c1_q4_1" name="C1_Eval_P4" value="1"/><label for="c1_q4_1" class="star">★</label></div></div>
-                    <div class="rating-row"><span>Pregunta 5</span><div class="star-rating"><input type="radio" id="c1_q5_5" name="C1_Eval_P5" value="5" required/><label for="c1_q5_5" class="star">★</label><input type="radio" id="c1_q5_4" name="C1_Eval_P5" value="4"/><label for="c1_q5_4" class="star">★</label><input type="radio" id="c1_q5_3" name="C1_Eval_P5" value="3"/><label for="c1_q5_3" class="star">★</label><input type="radio" id="c1_q5_2" name="C1_Eval_P5" value="2"/><label for="c1_q5_2" class="star">★</label><input type="radio" id="c1_q5_1" name="C1_Eval_P5" value="1"/><label for="c1_q5_1" class="star">★</label></div></div>
-                    <div class="rating-row"><span>Pregunta 6</span><div class="star-rating"><input type="radio" id="c1_q6_5" name="C1_Eval_P6" value="5" required/><label for="c1_q6_5" class="star">★</label><input type="radio" id="c1_q6_4" name="C1_Eval_P6" value="4"/><label for="c1_q6_4" class="star">★</label><input type="radio" id="c1_q6_3" name="C1_Eval_P6" value="3"/><label for="c1_q6_3" class="star">★</label><input type="radio" id="c1_q6_2" name="C1_Eval_P6" value="2"/><label for="c1_q6_2" class="star">★</label><input type="radio" id="c1_q6_1" name="C1_Eval_P6" value="1"/><label for="c1_q6_1" class="star">★</label></div></div>
-                    <div class="rating-row"><span>Pregunta 7</span><div class="star-rating"><input type="radio" id="c1_q7_5" name="C1_Eval_P7" value="5" required/><label for="c1_q7_5" class="star">★</label><input type="radio" id="c1_q7_4" name="C1_Eval_P7" value="4"/><label for="c1_q7_4" class="star">★</label><input type="radio" id="c1_q7_3" name="C1_Eval_P7" value="3"/><label for="c1_q7_3" class="star">★</label><input type="radio" id="c1_q7_2" name="C1_Eval_P7" value="2"/><label for="c1_q7_2" class="star">★</label><input type="radio" id="c1_q7_1" name="C1_Eval_P7" value="1"/><label for="c1_q7_1" class="star">★</label></div></div>
-                    <div class="rating-row"><span>Pregunta 8</span><div class="star-rating"><input type="radio" id="c1_q8_5" name="C1_Eval_P8" value="5" required/><label for="c1_q8_5" class="star">★</label><input type="radio" id="c1_q8_4" name="C1_Eval_P8" value="4"/><label for="c1_q8_4" class="star">★</label><input type="radio" id="c1_q8_3" name="C1_Eval_P8" value="3"/><label for="c1_q8_3" class="star">★</label><input type="radio" id="c1_q8_2" name="C1_Eval_P8" value="2"/><label for="c1_q8_2" class="star">★</label><input type="radio" id="c1_q8_1" name="C1_Eval_P8" value="1"/><label for="c1_q8_1" class="star">★</label></div></div>
-                    <label style="margin-top: 15px;">¿Por qué escogiste ese nivel de dificultad en general?</label>
-                    <textarea name="C1_Justificacion" rows="2" required></textarea>
-                </div>
 
-                <hr style="border-top:1px solid var(--border-color); margin: 30px 0;">
-
-                <h3>Ítem 2: Bosque de algas</h3>
-                <div class="reading-box">
-                    Las algas gigantes son el alimento principal de los erizos de mar. A su vez, las nutrias marinas se alimentan de erizos y regulan su población. Sin embargo, en los últimos años se ha registrado una disminución de nutrias marinas debido a la contaminación del agua...
-                </div>
-                
-                <div class="fase-title">Fase 1: Exploramos el fenómeno</div>
-                <p class="indicaciones">Lee con atención el ecosistema de la imagen y responde.</p>
-                <div class="question-block"><label>1. ¿Qué ecosistema se describe en el texto?</label><input type="text" name="C2_Q1" required></div>
-                <div class="question-block"><label>2. ¿Qué seres vivos se mencionan?</label><textarea name="C2_Q2" rows="2" required></textarea></div>
-                
-                <div class="fase-title">Fase 2: Activamos herramientas científicas</div>
-                <p class="indicaciones">Piensa y escribe los conceptos que identifiques en el fenómeno (cadenas, equilibrio, etc.):</p>
-                <div class="question-block"><label>3. Escribe los conceptos clave que identificaste:</label><textarea name="C2_Q3" rows="2" required></textarea></div>
-
-                <div class="fase-title">Fase 3: Aplicamos y razonamos</div>
-                <p class="indicaciones">Lee nuevamente el texto y responde:</p>
-                <div class="question-block">
-                    <label>4. Según el texto, ¿cuál es el alimento principal de los erizos de mar?</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="C2_Q4" value="A" required> A. Peces pequeños</label>
-                        <label><input type="radio" name="C2_Q4" value="B"> B. Algas gigantes</label>
-                        <label><input type="radio" name="C2_Q4" value="C"> C. Plancton</label>
-                        <label><input type="radio" name="C2_Q4" value="D"> D. Moluscos</label>
+                    <div class="fase-title">Fase 4: Evaluamos nuestras conclusiones</div>
+                    <div class="question-block"><label>8. ¿Tus respuestas se apoyan en evidencias del texto? Justifica.</label><textarea name="C1_Q8" rows="2" required></textarea></div>
+                    <div class="question-block"><label>9. Si una especie dejara de migrar en grupo, ¿qué riesgos podría enfrentar?</label><textarea name="C1_Q9" rows="2" required></textarea></div>
+                    
+                    <div class="rating-container">
+                        <div class="rating-header">
+                            <h4>Autoevaluación Ítem 1 (Ciencias)</h4>
+                            <p>Valora la dificultad de cada pregunta de este bloque:</p>
+                        </div>
+                        <div class="rating-row"><span>Pregunta 1</span><div class="star-rating"><input type="radio" id="c1_q1_5" name="C1_Eval_P1" value="5" required/><label for="c1_q1_5" class="star">★</label><input type="radio" id="c1_q1_4" name="C1_Eval_P1" value="4"/><label for="c1_q1_4" class="star">★</label><input type="radio" id="c1_q1_3" name="C1_Eval_P1" value="3"/><label for="c1_q1_3" class="star">★</label><input type="radio" id="c1_q1_2" name="C1_Eval_P1" value="2"/><label for="c1_q1_2" class="star">★</label><input type="radio" id="c1_q1_1" name="C1_Eval_P1" value="1"/><label for="c1_q1_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 2</span><div class="star-rating"><input type="radio" id="c1_q2_5" name="C1_Eval_P2" value="5" required/><label for="c1_q2_5" class="star">★</label><input type="radio" id="c1_q2_4" name="C1_Eval_P2" value="4"/><label for="c1_q2_4" class="star">★</label><input type="radio" id="c1_q2_3" name="C1_Eval_P2" value="3"/><label for="c1_q2_3" class="star">★</label><input type="radio" id="c1_q2_2" name="C1_Eval_P2" value="2"/><label for="c1_q2_2" class="star">★</label><input type="radio" id="c1_q2_1" name="C1_Eval_P2" value="1"/><label for="c1_q2_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 3</span><div class="star-rating"><input type="radio" id="c1_q3_5" name="C1_Eval_P3" value="5" required/><label for="c1_q3_5" class="star">★</label><input type="radio" id="c1_q3_4" name="C1_Eval_P3" value="4"/><label for="c1_q3_4" class="star">★</label><input type="radio" id="c1_q3_3" name="C1_Eval_P3" value="3"/><label for="c1_q3_3" class="star">★</label><input type="radio" id="c1_q3_2" name="C1_Eval_P3" value="2"/><label for="c1_q3_2" class="star">★</label><input type="radio" id="c1_q3_1" name="C1_Eval_P3" value="1"/><label for="c1_q3_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 4</span><div class="star-rating"><input type="radio" id="c1_q4_5" name="C1_Eval_P4" value="5" required/><label for="c1_q4_5" class="star">★</label><input type="radio" id="c1_q4_4" name="C1_Eval_P4" value="4"/><label for="c1_q4_4" class="star">★</label><input type="radio" id="c1_q4_3" name="C1_Eval_P4" value="3"/><label for="c1_q4_3" class="star">★</label><input type="radio" id="c1_q4_2" name="C1_Eval_P4" value="2"/><label for="c1_q4_2" class="star">★</label><input type="radio" id="c1_q4_1" name="C1_Eval_P4" value="1"/><label for="c1_q4_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 5</span><div class="star-rating"><input type="radio" id="c1_q5_5" name="C1_Eval_P5" value="5" required/><label for="c1_q5_5" class="star">★</label><input type="radio" id="c1_q5_4" name="C1_Eval_P5" value="4"/><label for="c1_q5_4" class="star">★</label><input type="radio" id="c1_q5_3" name="C1_Eval_P5" value="3"/><label for="c1_q5_3" class="star">★</label><input type="radio" id="c1_q5_2" name="C1_Eval_P5" value="2"/><label for="c1_q5_2" class="star">★</label><input type="radio" id="c1_q5_1" name="C1_Eval_P5" value="1"/><label for="c1_q5_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 6</span><div class="star-rating"><input type="radio" id="c1_q6_5" name="C1_Eval_P6" value="5" required/><label for="c1_q6_5" class="star">★</label><input type="radio" id="c1_q6_4" name="C1_Eval_P6" value="4"/><label for="c1_q6_4" class="star">★</label><input type="radio" id="c1_q6_3" name="C1_Eval_P6" value="3"/><label for="c1_q6_3" class="star">★</label><input type="radio" id="c1_q6_2" name="C1_Eval_P6" value="2"/><label for="c1_q6_2" class="star">★</label><input type="radio" id="c1_q6_1" name="C1_Eval_P6" value="1"/><label for="c1_q6_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 7</span><div class="star-rating"><input type="radio" id="c1_q7_5" name="C1_Eval_P7" value="5" required/><label for="c1_q7_5" class="star">★</label><input type="radio" id="c1_q7_4" name="C1_Eval_P7" value="4"/><label for="c1_q7_4" class="star">★</label><input type="radio" id="c1_q7_3" name="C1_Eval_P7" value="3"/><label for="c1_q7_3" class="star">★</label><input type="radio" id="c1_q7_2" name="C1_Eval_P7" value="2"/><label for="c1_q7_2" class="star">★</label><input type="radio" id="c1_q7_1" name="C1_Eval_P7" value="1"/><label for="c1_q7_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 8</span><div class="star-rating"><input type="radio" id="c1_q8_5" name="C1_Eval_P8" value="5" required/><label for="c1_q8_5" class="star">★</label><input type="radio" id="c1_q8_4" name="C1_Eval_P8" value="4"/><label for="c1_q8_4" class="star">★</label><input type="radio" id="c1_q8_3" name="C1_Eval_P8" value="3"/><label for="c1_q8_3" class="star">★</label><input type="radio" id="c1_q8_2" name="C1_Eval_P8" value="2"/><label for="c1_q8_2" class="star">★</label><input type="radio" id="c1_q8_1" name="C1_Eval_P8" value="1"/><label for="c1_q8_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 9</span><div class="star-rating"><input type="radio" id="c1_q9_5" name="C1_Eval_P9" value="5" required/><label for="c1_q9_5" class="star">★</label><input type="radio" id="c1_q9_4" name="C1_Eval_P9" value="4"/><label for="c1_q9_4" class="star">★</label><input type="radio" id="c1_q9_3" name="C1_Eval_P9" value="3"/><label for="c1_q9_3" class="star">★</label><input type="radio" id="c1_q9_2" name="C1_Eval_P9" value="2"/><label for="c1_q9_2" class="star">★</label><input type="radio" id="c1_q9_1" name="C1_Eval_P9" value="1"/><label for="c1_q9_1" class="star">★</label></div></div>
+                        
+                        <label style="margin-top: 15px;">¿Por qué escogiste ese nivel de dificultad en general?</label>
+                        <textarea name="C1_Justificacion" rows="2" required></textarea>
                     </div>
+
+                    <button type="button" class="btn-nav" onclick="goToItem('ciencia-i1', 'ciencia-i2')">Siguiente Ítem (Ciencias 2) ➔</button>
+                    <div style="clear:both;"></div>
                 </div>
 
-                <div class="question-block">
-                    <label>5. ¿Por qué ha disminuido la población de nutrias marinas?</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="C2_Q5" value="A" required> A. Por la pesca excesiva de erizos</label>
-                        <label><input type="radio" name="C2_Q5" value="B"> B. Por cambios climáticos naturales</label>
-                        <label><input type="radio" name="C2_Q5" value="C"> C. Por la contaminación del agua y actividades humanas</label>
-                        <label><input type="radio" name="C2_Q5" value="D"> D. Por la falta de algas</label>
+                <div id="ciencia-i2" style="display:none;">
+                    <hr style="border-top:1px solid var(--border-color); margin: 10px 0 30px;">
+                    <h3>Ítem 2: Bosque de algas</h3>
+                    <div class="reading-box">
+                        Las algas gigantes son el alimento principal de los erizos de mar. A su vez, las nutrias marinas se alimentan de erizos y regulan su población. Sin embargo, en los últimos años se ha registrado una disminución de nutrias marinas debido a la contaminación del agua...
                     </div>
-                </div>
+                    
+                    <div class="fase-title">Fase 1: Exploramos el fenómeno</div>
+                    <div class="question-block"><label>1. ¿Qué ecosistema se describe en el texto?</label><input type="text" name="C2_Q1" required></div>
+                    <div class="question-block"><label>2. ¿Qué seres vivos se mencionan?</label><textarea name="C2_Q2" rows="2" required></textarea></div>
+                    
+                    <div class="fase-title">Fase 2: Activamos herramientas científicas</div>
+                    <div class="question-block"><label>3. Escribe los conceptos clave que identificaste (cadenas, equilibrio, etc.):</label><textarea name="C2_Q3" rows="2" required></textarea></div>
 
-                <div class="question-block">
-                    <label>6. Si disminuyen las nutrias marinas, ¿qué es más probable que ocurra primero?</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="C2_Q6" value="A" required> A. Disminuyen los peces</label>
-                        <label><input type="radio" name="C2_Q6" value="B"> B. Aumentan los erizos de mar</label>
-                        <label><input type="radio" name="C2_Q6" value="C"> C. Aumentan las nutrias</label>
-                        <label><input type="radio" name="C2_Q6" value="D"> D. Desaparecen las algas inmediatamente</label>
+                    <div class="fase-title">Fase 3: Aplicamos y razonamos</div>
+                    <div class="question-block">
+                        <label>4. Según el texto, ¿cuál es el alimento principal de los erizos de mar?</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="C2_Q4" value="A" required> A. Peces pequeños</label>
+                            <label><input type="radio" name="C2_Q4" value="B"> B. Algas gigantes</label>
+                            <label><input type="radio" name="C2_Q4" value="C"> C. Plancton</label>
+                            <label><input type="radio" name="C2_Q4" value="D"> D. Moluscos</label>
+                        </div>
                     </div>
-                </div>
 
-                <div class="question-block">
-                    <label>7. ¿Cuál de las siguientes acciones ayudaría más a recuperar los bosques de algas?</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="C2_Q7" value="A" required> A. Aumentar la pesca de peces</label>
-                        <label><input type="radio" name="C2_Q7" value="B"> B. Reducir la contaminación del agua</label>
-                        <label><input type="radio" name="C2_Q7" value="C"> C. Capturar más erizos de mar</label>
-                        <label><input type="radio" name="C2_Q7" value="D"> D. Sembrar algas artificiales sin controlar el ecosistema</label>
+                    <div class="question-block">
+                        <label>5. ¿Por qué ha disminuido la población de nutrias marinas?</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="C2_Q5" value="A" required> A. Por la pesca excesiva de erizos</label>
+                            <label><input type="radio" name="C2_Q5" value="B"> B. Por cambios climáticos naturales</label>
+                            <label><input type="radio" name="C2_Q5" value="C"> C. Por la contaminación del agua y actividades humanas</label>
+                            <label><input type="radio" name="C2_Q5" value="D"> D. Por la falta de algas</label>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="question-block"><label>8. Explica cómo afectará la disminución de las nutrias marinas a la población de algas:</label><textarea name="C2_Q8" rows="2" required></textarea></div>
 
-                <div class="fase-title">Fase 4: Evaluamos nuestras conclusiones</div>
-                <p class="indicaciones">Reflexiona:</p>
-                <div class="question-block"><label>9. ¿Tu explicación anterior sigue la cadena alimenticia?</label><textarea name="C2_Q9" rows="2" required></textarea></div>
-                <div class="question-block"><label>10. ¿Tu explicación tiene sentido ecológico?</label><textarea name="C2_Q10" rows="2" required></textarea></div>
-
-                <div class="rating-container">
-                    <div class="rating-header">
-                        <h4>Autoevaluación Ítem 2 (Ciencias)</h4>
-                        <p>Valora la dificultad de las preguntas de este ejercicio (Escala 1 al 10 para cubrir el flujo):</p>
+                    <div class="question-block">
+                        <label>6. Si disminuyen las nutrias marinas, ¿qué es más probable que ocurra primero?</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="C2_Q6" value="A" required> A. Disminuyen los peces</label>
+                            <label><input type="radio" name="C2_Q6" value="B"> B. Aumentan los erizos de mar</label>
+                            <label><input type="radio" name="C2_Q6" value="C"> C. Aumentan las nutrias</label>
+                            <label><input type="radio" name="C2_Q6" value="D"> D. Desaparecen las algas inmediatamente</label>
+                        </div>
                     </div>
-                    <div class="rating-row"><span>Pregunta 1</span><div class="star-rating"><input type="radio" id="c2_q1_5" name="C2_Eval_P1" value="5" required/><label for="c2_q1_5" class="star">★</label><input type="radio" id="c2_q1_4" name="C2_Eval_P1" value="4"/><label for="c2_q1_4" class="star">★</label><input type="radio" id="c2_q1_3" name="C2_Eval_P1" value="3"/><label for="c2_q1_3" class="star">★</label><input type="radio" id="c2_q1_2" name="C2_Eval_P1" value="2"/><label for="c2_q1_2" class="star">★</label><input type="radio" id="c2_q1_1" name="C2_Eval_P1" value="1"/><label for="c2_q1_1" class="star">★</label></div></div>
-                    <div class="rating-row"><span>Pregunta 2</span><div class="star-rating"><input type="radio" id="c2_q2_5" name="C2_Eval_P2" value="5" required/><label for="c2_q2_5" class="star">★</label><input type="radio" id="c2_q2_4" name="C2_Eval_P2" value="4"/><label for="c2_q2_4" class="star">★</label><input type="radio" id="c2_q2_3" name="C2_Eval_P2" value="3"/><label for="c2_q2_3" class="star">★</label><input type="radio" id="c2_q2_2" name="C2_Eval_P2" value="2"/><label for="c2_q2_2" class="star">★</label><input type="radio" id="c2_q2_1" name="C2_Eval_P2" value="1"/><label for="c2_q2_1" class="star">★</label></div></div>
-                    <div class="rating-row"><span>Pregunta 3</span><div class="star-rating"><input type="radio" id="c2_q3_5" name="C2_Eval_P3" value="5" required/><label for="c2_q3_5" class="star">★</label><input type="radio" id="c2_q3_4" name="C2_Eval_P3" value="4"/><label for="c2_q3_4" class="star">★</label><input type="radio" id="c2_q3_3" name="C2_Eval_P3" value="3"/><label for="c2_q3_3" class="star">★</label><input type="radio" id="c2_q3_2" name="C2_Eval_P3" value="2"/><label for="c2_q3_2" class="star">★</label><input type="radio" id="c2_q3_1" name="C2_Eval_P3" value="1"/><label for="c2_q3_1" class="star">★</label></div></div>
-                    <div class="rating-row"><span>Pregunta 4</span><div class="star-rating"><input type="radio" id="c2_q4_5" name="C2_Eval_P4" value="5" required/><label for="c2_q4_5" class="star">★</label><input type="radio" id="c2_q4_4" name="C2_Eval_P4" value="4"/><label for="c2_q4_4" class="star">★</label><input type="radio" id="c2_q4_3" name="C2_Eval_P4" value="3"/><label for="c2_q4_3" class="star">★</label><input type="radio" id="c2_q4_2" name="C2_Eval_P4" value="2"/><label for="c2_q4_2" class="star">★</label><input type="radio" id="c2_q4_1" name="C2_Eval_P4" value="1"/><label for="c2_q4_1" class="star">★</label></div></div>
-                    <div class="rating-row"><span>Pregunta 5</span><div class="star-rating"><input type="radio" id="c2_q5_5" name="C2_Eval_P5" value="5" required/><label for="c2_q5_5" class="star">★</label><input type="radio" id="c2_q5_4" name="C2_Eval_P5" value="4"/><label for="c2_q5_4" class="star">★</label><input type="radio" id="c2_q5_3" name="C2_Eval_P5" value="3"/><label for="c2_q5_3" class="star">★</label><input type="radio" id="c2_q5_2" name="C2_Eval_P5" value="2"/><label for="c2_q5_2" class="star">★</label><input type="radio" id="c2_q5_1" name="C2_Eval_P5" value="1"/><label for="c2_q5_1" class="star">★</label></div></div>
-                    <div class="rating-row"><span>Pregunta 6</span><div class="star-rating"><input type="radio" id="c2_q6_5" name="C2_Eval_P6" value="5" required/><label for="c2_q6_5" class="star">★</label><input type="radio" id="c2_q6_4" name="C2_Eval_P6" value="4"/><label for="c2_q6_4" class="star">★</label><input type="radio" id="c2_q6_3" name="C2_Eval_P6" value="3"/><label for="c2_q6_3" class="star">★</label><input type="radio" id="c2_q6_2" name="C2_Eval_P6" value="2"/><label for="c2_q6_2" class="star">★</label><input type="radio" id="c2_q6_1" name="C2_Eval_P6" value="1"/><label for="c2_q6_1" class="star">★</label></div></div>
-                    <div class="rating-row"><span>Pregunta 7</span><div class="star-rating"><input type="radio" id="c2_q7_5" name="C2_Eval_P7" value="5" required/><label for="c2_q7_5" class="star">★</label><input type="radio" id="c2_q7_4" name="C2_Eval_P7" value="4"/><label for="c2_q7_4" class="star">★</label><input type="radio" id="c2_q7_3" name="C2_Eval_P7" value="3"/><label for="c2_q7_3" class="star">★</label><input type="radio" id="c2_q7_2" name="C2_Eval_P7" value="2"/><label for="c2_q7_2" class="star">★</label><input type="radio" id="c2_q7_1" name="C2_Eval_P7" value="1"/><label for="c2_q7_1" class="star">★</label></div></div>
-                    <div class="rating-row"><span>Pregunta 8</span><div class="star-rating"><input type="radio" id="c2_q8_5" name="C2_Eval_P8" value="5" required/><label for="c2_q8_5" class="star">★</label><input type="radio" id="c2_q8_4" name="C2_Eval_P8" value="4"/><label for="c2_q8_4" class="star">★</label><input type="radio" id="c2_q8_3" name="C2_Eval_P8" value="3"/><label for="c2_q8_3" class="star">★</label><input type="radio" id="c2_q8_2" name="C2_Eval_P8" value="2"/><label for="c2_q8_2" class="star">★</label><input type="radio" id="c2_q8_1" name="C2_Eval_P8" value="1"/><label for="c2_q8_1" class="star">★</label></div></div>
-                    <div class="rating-row"><span>Pregunta 9</span><div class="star-rating"><input type="radio" id="c2_q9_5" name="C2_Eval_P9" value="5" required/><label for="c2_q9_5" class="star">★</label><input type="radio" id="c2_q9_4" name="C2_Eval_P9" value="4"/><label for="c2_q9_4" class="star">★</label><input type="radio" id="c2_q9_3" name="C2_Eval_P9" value="3"/><label for="c2_q9_3" class="star">★</label><input type="radio" id="c2_q9_2" name="C2_Eval_P9" value="2"/><label for="c2_q9_2" class="star">★</label><input type="radio" id="c2_q9_1" name="C2_Eval_P9" value="1"/><label for="c2_q9_1" class="star">★</label></div></div>
-                    <div class="rating-row"><span>Pregunta 10</span><div class="star-rating"><input type="radio" id="c2_q10_5" name="C2_Eval_P10" value="5" required/><label for="c2_q10_5" class="star">★</label><input type="radio" id="c2_q10_4" name="C2_Eval_P10" value="4"/><label for="c2_q10_4" class="star">★</label><input type="radio" id="c2_q10_3" name="C2_Eval_P10" value="3"/><label for="c2_q10_3" class="star">★</label><input type="radio" id="c2_q10_2" name="C2_Eval_P10" value="2"/><label for="c2_q10_2" class="star">★</label><input type="radio" id="c2_q10_1" name="C2_Eval_P10" value="1"/><label for="c2_q10_1" class="star">★</label></div></div>
 
-                    <label style="margin-top: 15px;">¿Por qué escogiste ese nivel de dificultad en general?</label>
-                    <textarea name="C2_Justificacion" rows="2" required></textarea>
+                    <div class="question-block">
+                        <label>7. ¿Cuál de las siguientes acciones ayudaría más a recuperar los bosques de algas?</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="C2_Q7" value="A" required> A. Aumentar la pesca de peces</label>
+                            <label><input type="radio" name="C2_Q7" value="B"> B. Reducir la contaminación del agua</label>
+                            <label><input type="radio" name="C2_Q7" value="C"> C. Capturar más erizos de mar</label>
+                            <label><input type="radio" name="C2_Q7" value="D"> D. Sembrar algas artificiales sin controlar el ecosistema</label>
+                        </div>
+                    </div>
+                    
+                    <div class="question-block"><label>8. Explica cómo afectará la disminución de las nutrias marinas a la población de algas:</label><textarea name="C2_Q8" rows="2" required></textarea></div>
+
+                    <div class="fase-title">Fase 4: Evaluamos nuestras conclusiones</div>
+                    <div class="question-block"><label>9. ¿Tu explicación anterior sigue la cadena alimenticia?</label><textarea name="C2_Q9" rows="2" required></textarea></div>
+                    <div class="question-block"><label>10. ¿Tu explicación tiene sentido ecológico?</label><textarea name="C2_Q10" rows="2" required></textarea></div>
+
+                    <div class="rating-container">
+                        <div class="rating-header">
+                            <h4>Autoevaluación Ítem 2 (Ciencias)</h4>
+                            <p>Valora la dificultad de las preguntas de este ejercicio:</p>
+                        </div>
+                        <div class="rating-row"><span>Pregunta 1</span><div class="star-rating"><input type="radio" id="c2_q1_5" name="C2_Eval_P1" value="5" required/><label for="c2_q1_5" class="star">★</label><input type="radio" id="c2_q1_4" name="C2_Eval_P1" value="4"/><label for="c2_q1_4" class="star">★</label><input type="radio" id="c2_q1_3" name="C2_Eval_P1" value="3"/><label for="c2_q1_3" class="star">★</label><input type="radio" id="c2_q1_2" name="C2_Eval_P1" value="2"/><label for="c2_q1_2" class="star">★</label><input type="radio" id="c2_q1_1" name="C2_Eval_P1" value="1"/><label for="c2_q1_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 2</span><div class="star-rating"><input type="radio" id="c2_q2_5" name="C2_Eval_P2" value="5" required/><label for="c2_q2_5" class="star">★</label><input type="radio" id="c2_q2_4" name="C2_Eval_P2" value="4"/><label for="c2_q2_4" class="star">★</label><input type="radio" id="c2_q2_3" name="C2_Eval_P2" value="3"/><label for="c2_q2_3" class="star">★</label><input type="radio" id="c2_q2_2" name="C2_Eval_P2" value="2"/><label for="c2_q2_2" class="star">★</label><input type="radio" id="c2_q2_1" name="C2_Eval_P2" value="1"/><label for="c2_q2_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 3</span><div class="star-rating"><input type="radio" id="c2_q3_5" name="C2_Eval_P3" value="5" required/><label for="c2_q3_5" class="star">★</label><input type="radio" id="c2_q3_4" name="C2_Eval_P3" value="4"/><label for="c2_q3_4" class="star">★</label><input type="radio" id="c2_q3_3" name="C2_Eval_P3" value="3"/><label for="c2_q3_3" class="star">★</label><input type="radio" id="c2_q3_2" name="C2_Eval_P3" value="2"/><label for="c2_q3_2" class="star">★</label><input type="radio" id="c2_q3_1" name="C2_Eval_P3" value="1"/><label for="c2_q3_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 4</span><div class="star-rating"><input type="radio" id="c2_q4_5" name="C2_Eval_P4" value="5" required/><label for="c2_q4_5" class="star">★</label><input type="radio" id="c2_q4_4" name="C2_Eval_P4" value="4"/><label for="c2_q4_4" class="star">★</label><input type="radio" id="c2_q4_3" name="C2_Eval_P4" value="3"/><label for="c2_q4_3" class="star">★</label><input type="radio" id="c2_q4_2" name="C2_Eval_P4" value="2"/><label for="c2_q4_2" class="star">★</label><input type="radio" id="c2_q4_1" name="C2_Eval_P4" value="1"/><label for="c2_q4_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 5</span><div class="star-rating"><input type="radio" id="c2_q5_5" name="C2_Eval_P5" value="5" required/><label for="c2_q5_5" class="star">★</label><input type="radio" id="c2_q5_4" name="C2_Eval_P5" value="4"/><label for="c2_q5_4" class="star">★</label><input type="radio" id="c2_q5_3" name="C2_Eval_P5" value="3"/><label for="c2_q5_3" class="star">★</label><input type="radio" id="c2_q5_2" name="C2_Eval_P5" value="2"/><label for="c2_q5_2" class="star">★</label><input type="radio" id="c2_q5_1" name="C2_Eval_P5" value="1"/><label for="c2_q5_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 6</span><div class="star-rating"><input type="radio" id="c2_q6_5" name="C2_Eval_P6" value="5" required/><label for="c2_q6_5" class="star">★</label><input type="radio" id="c2_q6_4" name="C2_Eval_P6" value="4"/><label for="c2_q6_4" class="star">★</label><input type="radio" id="c2_q6_3" name="C2_Eval_P6" value="3"/><label for="c2_q6_3" class="star">★</label><input type="radio" id="c2_q6_2" name="C2_Eval_P6" value="2"/><label for="c2_q6_2" class="star">★</label><input type="radio" id="c2_q6_1" name="C2_Eval_P6" value="1"/><label for="c2_q6_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 7</span><div class="star-rating"><input type="radio" id="c2_q7_5" name="C2_Eval_P7" value="5" required/><label for="c2_q7_5" class="star">★</label><input type="radio" id="c2_q7_4" name="C2_Eval_P7" value="4"/><label for="c2_q7_4" class="star">★</label><input type="radio" id="c2_q7_3" name="C2_Eval_P7" value="3"/><label for="c2_q7_3" class="star">★</label><input type="radio" id="c2_q7_2" name="C2_Eval_P7" value="2"/><label for="c2_q7_2" class="star">★</label><input type="radio" id="c2_q7_1" name="C2_Eval_P7" value="1"/><label for="c2_q7_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 8</span><div class="star-rating"><input type="radio" id="c2_q8_5" name="C2_Eval_P8" value="5" required/><label for="c2_q8_5" class="star">★</label><input type="radio" id="c2_q8_4" name="C2_Eval_P8" value="4"/><label for="c2_q8_4" class="star">★</label><input type="radio" id="c2_q8_3" name="C2_Eval_P8" value="3"/><label for="c2_q8_3" class="star">★</label><input type="radio" id="c2_q8_2" name="C2_Eval_P8" value="2"/><label for="c2_q8_2" class="star">★</label><input type="radio" id="c2_q8_1" name="C2_Eval_P8" value="1"/><label for="c2_q8_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 9</span><div class="star-rating"><input type="radio" id="c2_q9_5" name="C2_Eval_P9" value="5" required/><label for="c2_q9_5" class="star">★</label><input type="radio" id="c2_q9_4" name="C2_Eval_P9" value="4"/><label for="c2_q9_4" class="star">★</label><input type="radio" id="c2_q9_3" name="C2_Eval_P9" value="3"/><label for="c2_q9_3" class="star">★</label><input type="radio" id="c2_q9_2" name="C2_Eval_P9" value="2"/><label for="c2_q9_2" class="star">★</label><input type="radio" id="c2_q9_1" name="C2_Eval_P9" value="1"/><label for="c2_q9_1" class="star">★</label></div></div>
+                        <div class="rating-row"><span>Pregunta 10</span><div class="star-rating"><input type="radio" id="c2_q10_5" name="C2_Eval_P10" value="5" required/><label for="c2_q10_5" class="star">★</label><input type="radio" id="c2_q10_4" name="C2_Eval_P10" value="4"/><label for="c2_q10_4" class="star">★</label><input type="radio" id="c2_q10_3" name="C2_Eval_P10" value="3"/><label for="c2_q10_3" class="star">★</label><input type="radio" id="c2_q10_2" name="C2_Eval_P10" value="2"/><label for="c2_q10_2" class="star">★</label><input type="radio" id="c2_q10_1" name="C2_Eval_P10" value="1"/><label for="c2_q10_1" class="star">★</label></div></div>
+
+                        <label style="margin-top: 15px;">¿Por qué escogiste ese nivel de dificultad en general?</label>
+                        <textarea name="C2_Justificacion" rows="2" required></textarea>
+                    </div>
+
+                    <hr style="border-top: 1px solid var(--border-color); margin: 35px 0 25px;">
+                    <button type="button" class="submit-btn" id="submit-btn" onclick="submitForm()">Completar y Enviar Evaluación</button>
                 </div>
-
-                <hr style="border-top: 1px solid var(--border-color); margin: 35px 0 25px;">
-                <button type="submit" class="submit-btn">Completar y Enviar Evaluación</button>
             </div>
         </form>
     </main>
@@ -658,35 +559,68 @@
     <div id="modal-resultados" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">¡Prueba Completada! 🎉</div>
-            <p style="text-align: center; margin-bottom: 20px; color: var(--text-muted);">Tus respuestas han sido enviadas exitosamente. Aquí tienes la revisión automática de las preguntas de opción múltiple (Lectura y Ciencias):</p>
+            <p style="text-align: center; margin-bottom: 20px; color: var(--text-muted);">Tus respuestas han sido enviadas exitosamente. Aquí tienes la revisión automática de las preguntas de opción múltiple:</p>
             <div id="resultados-lista"></div>
             <button class="modal-btn" onclick="cerrarModal()">Cerrar y Volver al Inicio</button>
         </div>
     </div>
 
     <script>
-        function openTab(tabId, index) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            document.querySelectorAll('.tab')[index].classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Función para validar obligatoriedad de campos de un div contenedor
+        function validateContainer(containerId) {
+            const container = document.getElementById(containerId);
+            const inputs = container.querySelectorAll('input, textarea, select');
+            for (let input of inputs) {
+                if (!input.checkValidity()) {
+                    input.reportValidity(); // Muestra el mensaje nativo de error ("Completa este campo")
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Navegar entre Ítems de una misma sección
+        function goToItem(currentId, nextId) {
+            if (validateContainer(currentId)) {
+                document.getElementById(currentId).style.display = 'none';
+                const nextEl = document.getElementById(nextId);
+                nextEl.style.display = 'block';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Navegar a una nueva pestaña (materia)
+        function goToTab(currentContainerId, nextTabId, nextTabElementId) {
+            if (validateContainer(currentContainerId)) {
+                // Ocultar pestaña actual
+                document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+                
+                // Actualizar barra visual de pestañas
+                document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+                document.getElementById(nextTabElementId).classList.add('active');
+                
+                // Mostrar nueva pestaña
+                document.getElementById(nextTabId).classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         }
 
         function cerrarModal() {
             document.getElementById("modal-resultados").style.display = "none";
-            document.getElementById("main-form").reset();
-            openTab('registro', 0);
+            location.reload(); // Recarga la página para resetear todo el flujo desde el inicio
         }
 
-        document.getElementById("main-form").addEventListener("submit", function(e) {
-            e.preventDefault(); 
-            
-            const submitBtn = document.querySelector(".submit-btn");
+        // Procesar el envío de datos
+        function submitForm() {
+            // Validar la última pantalla (Ciencias Ítem 2)
+            if (!validateContainer('ciencia-i2')) return;
+
+            const form = document.getElementById('main-form');
+            const submitBtn = document.getElementById("submit-btn");
             submitBtn.textContent = "Validando y Enviando...";
             submitBtn.disabled = true;
 
-            const formData = new FormData(this);
+            const formData = new FormData(form);
 
             // EVALUACIÓN AUTOMÁTICA
             let resultadosHTML = "";
@@ -782,7 +716,7 @@
                 submitBtn.textContent = "Completar y Enviar Evaluación";
                 submitBtn.disabled = false;
             });
-        });
+        }
     </script>
 </body>
 </html>
