@@ -30,6 +30,17 @@
             color: white; padding: 30px 20px; text-align: center; 
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
         }
+        
+        /* Estilos para la portada */
+        .portada-img {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+
         header h1 { font-size: 1.7rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 5px; }
         header p { font-size: 1rem; color: #94a3b8; font-weight: 400; }
 
@@ -150,6 +161,7 @@
 <body>
 
     <header>
+        <img src="PORTADA.png" alt="Aprendamos a Estudiar" class="portada-img" onerror="this.style.display='none'">
         <h1>APRENDAMOS A ESTUDIAR</h1>
         <p>Centro Escolar Cantón San Antonio | 9º Grado A</p>
     </header>
@@ -566,13 +578,49 @@
     </div>
 
     <script>
+        const formId = 'main-form';
+        const form = document.getElementById(formId);
+
+        // --- SISTEMA DE AUTOGUARDADO (LOCALSTORAGE) ---
+        // 1. Guardar datos cada vez que el estudiante escriba o seleccione algo
+        form.addEventListener('input', function(e) {
+            const target = e.target;
+            if (target.name) {
+                if (target.type === 'radio') {
+                    if (target.checked) {
+                        localStorage.setItem(target.name, target.value);
+                    }
+                } else {
+                    localStorage.setItem(target.name, target.value);
+                }
+            }
+        });
+
+        // 2. Cargar los datos guardados al iniciar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputs = form.querySelectorAll('input, textarea, select');
+            inputs.forEach(input => {
+                const savedValue = localStorage.getItem(input.name);
+                if (savedValue) {
+                    if (input.type === 'radio') {
+                        if (input.value === savedValue) {
+                            input.checked = true;
+                        }
+                    } else {
+                        input.value = savedValue;
+                    }
+                }
+            });
+        });
+        // ----------------------------------------------
+
         // Función para validar obligatoriedad de campos de un div contenedor
         function validateContainer(containerId) {
             const container = document.getElementById(containerId);
             const inputs = container.querySelectorAll('input, textarea, select');
             for (let input of inputs) {
                 if (!input.checkValidity()) {
-                    input.reportValidity(); // Muestra el mensaje nativo de error ("Completa este campo")
+                    input.reportValidity();
                     return false;
                 }
             }
@@ -592,14 +640,11 @@
         // Navegar a una nueva pestaña (materia)
         function goToTab(currentContainerId, nextTabId, nextTabElementId) {
             if (validateContainer(currentContainerId)) {
-                // Ocultar pestaña actual
                 document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
                 
-                // Actualizar barra visual de pestañas
                 document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
                 document.getElementById(nextTabElementId).classList.add('active');
                 
-                // Mostrar nueva pestaña
                 document.getElementById(nextTabId).classList.add('active');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
@@ -607,15 +652,13 @@
 
         function cerrarModal() {
             document.getElementById("modal-resultados").style.display = "none";
-            location.reload(); // Recarga la página para resetear todo el flujo desde el inicio
+            location.reload(); 
         }
 
         // Procesar el envío de datos
         function submitForm() {
-            // Validar la última pantalla (Ciencias Ítem 2)
             if (!validateContainer('ciencia-i2')) return;
 
-            const form = document.getElementById('main-form');
             const submitBtn = document.getElementById("submit-btn");
             submitBtn.textContent = "Validando y Enviando...";
             submitBtn.disabled = true;
@@ -703,6 +746,9 @@
             .then(response => response.json())
             .then(data => {
                 if(data.status === "success") {
+                    // Borramos el localStorage porque ya se envió con éxito
+                    localStorage.clear();
+                    
                     document.getElementById("resultados-lista").innerHTML = resultadosHTML;
                     document.getElementById("modal-resultados").style.display = "flex";
                 } else {
